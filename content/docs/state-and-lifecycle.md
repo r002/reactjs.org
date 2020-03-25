@@ -72,88 +72,41 @@ To implement this, we need to add "state" to the `Clock` component.
 
 State is similar to props, but it is private and fully controlled by the component.
 
-## Converting a Function to a Class {#converting-a-function-to-a-class}
-
-You can convert a function component like `Clock` to a class in five steps:
-
-1. Create an [ES6 class](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes), with the same name, that extends `React.Component`.
-
-2. Add a single empty method to it called `render()`.
-
-3. Move the body of the function into the `render()` method.
-
-4. Replace `props` with `this.props` in the `render()` body.
-
-5. Delete the remaining empty function declaration.
-
-```js
-class Clock extends React.Component {
-  render() {
-    return (
-      <div>
-        <h1>Hello, world!</h1>
-        <h2>It is {this.props.date.toLocaleTimeString()}.</h2>
-      </div>
-    );
-  }
-}
-```
-
-[**Try it on CodePen**](https://codepen.io/gaearon/pen/zKRGpo?editors=0010)
-
-`Clock` is now defined as a class rather than a function.
-
-The `render` method will be called each time an update happens, but as long as we render `<Clock />` into the same DOM node, only a single instance of the `Clock` class will be used. This lets us use additional features such as local state and lifecycle methods.
-
-## Adding Local State to a Class {#adding-local-state-to-a-class}
+## Adding Local State to a Component {#adding-local-state-to-a-component}
 
 We will move the `date` from props to state in three steps:
 
-1) Replace `this.props.date` with `this.state.date` in the `render()` method:
+1) Replace `props.date` with `date` in the `h2`:
 
-```js{6}
-class Clock extends React.Component {
-  render() {
-    return (
-      <div>
-        <h1>Hello, world!</h1>
-        <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
-      </div>
-    );
-  }
+```js{5}
+function Clock(props) {
+  return (
+    <div>
+      <h1>Hello, world!</h1>
+      <h2>It is {date.toLocaleTimeString()}.</h2>    
+    </div>
+  );
 }
 ```
 
-2) Add a [class constructor](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes#Constructor) that assigns the initial `this.state`:
+2) Import [useState](/docs/hooks-reference.html#usestate) from the React library and add a `useState` call that assigns the initial date to be `new Date()`.:
 
-```js{4}
-class Clock extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {date: new Date()};
-  }
+```js{1,4}
+import React, { useState, useEffect } from 'react';
 
-  render() {
-    return (
-      <div>
-        <h1>Hello, world!</h1>
-        <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
-      </div>
-    );
-  }
+function Clock(props) {
+  const [date, setDate] = useState(new Date())
+
+  return (
+    <div>
+      <h1>Hello, world!</h1>
+      <h2>It is {date.toLocaleTimeString()}.</h2>    
+    </div>
+  );
 }
 ```
 
-Note how we pass `props` to the base constructor:
-
-```js{2}
-  constructor(props) {
-    super(props);
-    this.state = {date: new Date()};
-  }
-```
-
-Class components should always call the base constructor with `props`.
+[useState](/docs/hooks-reference.html#usestate) is a special function that returns two things: a value and a function to change that value. In this example, the `const [date, setDate]` sets the value to `date`, and the function to `setDate`. The argument we pass to `useState` (`new Date()` in this case) is the initial value of `date`.
 
 3) Remove the `date` prop from the `<Clock />` element:
 
@@ -168,21 +121,18 @@ We will later add the timer code back to the component itself.
 
 The result looks like this:
 
-```js{2-5,11,18}
-class Clock extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {date: new Date()};
-  }
+```js{1,4,9,15}
+import React, { useState, useEffect } from 'react';
 
-  render() {
-    return (
-      <div>
-        <h1>Hello, world!</h1>
-        <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
-      </div>
-    );
-  }
+function Clock(props) {
+  const [date, setDate] = useState(new Date())
+
+  return (
+    <div>
+      <h1>Hello, world!</h1>
+      <h2>It is {date.toLocaleTimeString()}.</h2>    
+    </div>
+  );
 }
 
 ReactDOM.render(
@@ -191,43 +141,84 @@ ReactDOM.render(
 );
 ```
 
-[**Try it on CodePen**](https://codepen.io/gaearon/pen/KgQpJd?editors=0010)
+<!-- TODO: NEW CODEPEN [**Try it on CodePen**](https://codepen.io/gaearon/pen/KgQpJd?editors=0010) -->
 
 Next, we'll make the `Clock` set up its own timer and update itself every second.
 
-## Adding Lifecycle Methods to a Class {#adding-lifecycle-methods-to-a-class}
+## Adding useEffect to a Component {#adding-useeffect-to-a-component}
 
 In applications with many components, it's very important to free up resources taken by the components when they are destroyed.
 
 We want to [set up a timer](https://developer.mozilla.org/en-US/docs/Web/API/WindowTimers/setInterval) whenever the `Clock` is rendered to the DOM for the first time. This is called "mounting" in React.
 
-We also want to [clear that timer](https://developer.mozilla.org/en-US/docs/Web/API/WindowTimers/clearInterval) whenever the DOM produced by the `Clock` is removed. This is called "unmounting" in React.
+The code for setting up a timer looks like this:
 
-We can declare special methods on the component class to run some code when a component mounts and unmounts:
+```js
+const timerID = setInterval(
+  () => tick(),
+  1000
+);
+```
 
-```js{7-9,11-13}
-class Clock extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {date: new Date()};
-  }
+This timer will run the `tick` function once every second (1000 milliseconds).
 
-  componentDidMount() {
+We also want to [clear the timer](https://developer.mozilla.org/en-US/docs/Web/API/WindowTimers/clearInterval) whenever the DOM produced by the `Clock` is removed. This is called "unmounting" in React.
 
-  }
+The code for clearing the timer looks like this:
 
-  componentWillUnmount() {
+```js
+clearInterval(timerID)
+```
 
-  }
+To get the timer setup to run when the component mounts, and to get the timer to clear when the component unmounts, we need to use [the useEffect function](/docs/hooks-reference.html#useeffect).
 
-  render() {
-    return (
-      <div>
-        <h1>Hello, world!</h1>
-        <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
-      </div>
+The `useEffect` function takes a function as an argument. The function you pass to `useEffect` gets run when the component mounts. So, to setup the timer when the `Clock` component mounts, you need to call `useEffect` like this:
+
+```js{1,6}
+useEffect(() => {
+  const timerID = setInterval(
+    () => tick(),
+    1000
+  );
+});
+```
+
+If you want some specific code to run when the component ***un***mounts, you have to make the function you pass to `useEffect` *return* a function that contains that code. We want to clear our timer when the component unmounts, so we need to return a function that clears the timer in `useEffect`, like this:
+
+```js{7}
+useEffect(() => {
+  const timerID = setInterval(
+    () => tick(),
+    1000
+  );
+
+  return () => clearInterval(timerID);
+});
+```
+
+With this code, `setInterval` will get called when our component mounts, and `clearInterval` will get called when our component unmounts.
+
+Let's put this `useEffect` code into our `Clock` component:
+
+```js{4-11}
+function Clock(props) {
+  const [date, setDate] = useState(new Date())
+
+  useEffect(() => {
+    const timerID = setInterval(
+      () => tick(),
+      1000
     );
-  }
+    
+    return clearInterval(timerID);
+  });
+
+  return (
+    <div>
+      <h1>Hello, world!</h1>
+      <h2>It is {date.toLocaleTimeString()}.</h2>    
+    </div>
+  );
 }
 ```
 
