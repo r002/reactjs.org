@@ -335,96 +335,38 @@ Let's quickly recap what's going on and the order in which the methods are calle
 
 ## Using State Correctly {#using-state-correctly}
 
-There are three things you should know about `setState()`.
+There are three things you should know about `useState()`.
 
 ### Do Not Modify State Directly {#do-not-modify-state-directly}
 
 For example, this will not re-render a component:
 
 ```js
+const [comment, setComment] = useState('some comment')
 // Wrong
-this.state.comment = 'Hello';
+comment = 'some new comment';
 ```
 
-Instead, use `setState()`:
+Instead, use `setComment()`:
 
 ```js
 // Correct
-this.setState({comment: 'Hello'});
+setComment('some new comment');
 ```
 
-The only place where you can assign `this.state` is the constructor.
+The only way you can change a variable you get from calling `useState` is with the `set` function it returns (`setComment` in this example).
 
-### State Updates May Be Asynchronous {#state-updates-may-be-asynchronous}
+### Only Call useState (and useEffect) at the Top Level {#only-call-usestate-and-useeffect-at-the-top-level}
+**Don't call `useState` or `useEffect` inside loops, conditions, or nested functions.** Instead, always use them at the top level of your React function. By following this rule, you ensure that they are called in the same order each time a component renders. That's what allows React to correctly preserve the state between multiple `useState` and `useEffect` calls.
 
-React may batch multiple `setState()` calls into a single update for performance.
+### Only Call `useState` and `useEffect` from React Functions {#only-call-usestate-and-useeffect-from-react-functions}
 
-Because `this.props` and `this.state` may be updated asynchronously, you should not rely on their values for calculating the next state.
+**Don't call `useState` or `useEffect` from regular JavaScript functions.** Instead, you can:
 
-For example, this code may fail to update the counter:
+* ✅ Call them from React function components.
+* ✅ Call them from custom Hooks (we'll learn about these [later on](/docs/hooks-custom.html)).
 
-```js
-// Wrong
-this.setState({
-  counter: this.state.counter + this.props.increment,
-});
-```
-
-To fix it, use a second form of `setState()` that accepts a function rather than an object. That function will receive the previous state as the first argument, and the props at the time the update is applied as the second argument:
-
-```js
-// Correct
-this.setState((state, props) => ({
-  counter: state.counter + props.increment
-}));
-```
-
-We used an [arrow function](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/Arrow_functions) above, but it also works with regular functions:
-
-```js
-// Correct
-this.setState(function(state, props) {
-  return {
-    counter: state.counter + props.increment
-  };
-});
-```
-
-### State Updates are Merged {#state-updates-are-merged}
-
-When you call `setState()`, React merges the object you provide into the current state.
-
-For example, your state may contain several independent variables:
-
-```js{4,5}
-  constructor(props) {
-    super(props);
-    this.state = {
-      posts: [],
-      comments: []
-    };
-  }
-```
-
-Then you can update them independently with separate `setState()` calls:
-
-```js{4,10}
-  componentDidMount() {
-    fetchPosts().then(response => {
-      this.setState({
-        posts: response.posts
-      });
-    });
-
-    fetchComments().then(response => {
-      this.setState({
-        comments: response.comments
-      });
-    });
-  }
-```
-
-The merging is shallow, so `this.setState({comments})` leaves `this.state.posts` intact, but completely replaces `this.state.comments`.
+By following this rule, you ensure that all stateful logic in a component is clearly visible from its source code.
 
 ## The Data Flows Down {#the-data-flows-down}
 
