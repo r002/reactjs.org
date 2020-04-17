@@ -74,9 +74,9 @@ State is similar to props, but it is private and fully controlled by the compone
 
 ## Adding Local State to a Component {#adding-local-state-to-a-component}
 
-We will move the `date` from props to state in three steps:
+We will move the `date` from props to state in four steps:
 
-1) Replace `props.date` with `date` in the `h2`:
+1) Replace `props.date` with `date` in the `<h2>`:
 
 ```js{5}
 function Clock(props) {
@@ -89,10 +89,35 @@ function Clock(props) {
 }
 ```
 
-2) Import [useState](/docs/hooks-reference.html#usestate) from the React library and add a `useState` call that assigns the initial date to be `new Date()`.:
+2) Import the [useState](/docs/hooks-reference.html#usestate) function from the React library:
 
-```js{1,4}
-import React, { useState, useEffect } from 'react';
+```js{1}
+import React, { useState } from 'react';
+
+function Clock(props) {
+  return (
+    <div>
+      <h1>Hello, world!</h1>
+      <h2>It is {date.toLocaleTimeString()}.</h2>    
+    </div>
+  );
+}
+```
+<!-- 
+[useState](/docs/hooks-reference.html#usestate) is a special React function that lets us create "state" data that React can understand, monitor, and change. Whenever any "state" data created with `useState` changes, React will re-render the DOM and update it accordingly.
+
+A `useState` call sets an initial value for a piece of "state", and gives back the current value of that data, and a function that can change the data. For example, in this `useState` call:
+
+```js
+const [date, setDate] = useState(new Date())
+```
+
+`useState(new Date())` sets the state's initial value to `new Date()`. `const [date, setDate] = ` puts the state in a variable `date`, and puts the function that will let us change the data into a variable `setDate`. -->
+
+3) Add a [useState](/docs/hooks-reference.html#usestate) call that assigns the initial date to be `new Date()`:
+
+```js{4}
+import React, { useState } from 'react';
 
 function Clock(props) {
   const [date, setDate] = useState(new Date())
@@ -105,10 +130,10 @@ function Clock(props) {
   );
 }
 ```
+<!-- 
+[useState](/docs/hooks-reference.html#usestate) is a special function that returns two things: a value and a function to change that value. In `const [date, setDate] = useState(new Date())`, the `useState(new Date())` adds a new value to React's state, and sets that value to be `new Date()`. The `const [date, setDate] = ` part puts the value in a variable called `date`, and puts the function that changes the value in a variable called `setDate`. -->
 
-[useState](/docs/hooks-reference.html#usestate) is a special function that returns two things: a value and a function to change that value. In this example, the `const [date, setDate]` sets the value to `date`, and the function to `setDate`. The argument we pass to `useState` (`new Date()` in this case) is the initial value of `date`.
-
-3) Remove the `date` prop from the `<Clock />` element:
+4) Remove the `date` prop from the `<Clock />` element:
 
 ```js{2}
 ReactDOM.render(
@@ -122,7 +147,7 @@ We will later add the timer code back to the component itself.
 The result looks like this:
 
 ```js{1,4,9,15}
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 function Clock(props) {
   const [date, setDate] = useState(new Date())
@@ -143,7 +168,9 @@ ReactDOM.render(
 
 <!-- TODO: NEW CODEPEN [**Try it on CodePen**](https://codepen.io/gaearon/pen/KgQpJd?editors=0010) -->
 
-Next, we'll make the `Clock` set up its own timer and update itself every second.
+Now we've got a React component with a `date` variable, and a `setDate` function for changing that variable. But when and how do we change it?
+
+Let's make the `Clock` set up its own timer and update itself every second.
 
 ## Adding useEffect to a Component {#adding-useeffect-to-a-component}
 
@@ -151,7 +178,7 @@ In applications with many components, it's very important to free up resources t
 
 We want to [set up a timer](https://developer.mozilla.org/en-US/docs/Web/API/WindowTimers/setInterval) whenever the `Clock` is rendered to the DOM for the first time. This is called "mounting" in React.
 
-The code for setting up a timer looks like this:
+The code for setting up a timer to run a `tick` function every second looks like this:
 
 ```js
 const timerID = setInterval(
@@ -160,19 +187,19 @@ const timerID = setInterval(
 );
 ```
 
-This timer will run the `tick` function once every second (1000 milliseconds).
+This timer code is all JavaScript so far. No React yet.
 
 We also want to [clear the timer](https://developer.mozilla.org/en-US/docs/Web/API/WindowTimers/clearInterval) whenever the DOM produced by the `Clock` is removed. This is called "unmounting" in React.
 
-The code for clearing the timer looks like this:
+The JavaScript code for clearing our timer looks like this:
 
 ```js
 clearInterval(timerID)
 ```
 
-To get the timer setup to run when the component mounts, and to get the timer to clear when the component unmounts, we need to use [the useEffect function](/docs/hooks-reference.html#useeffect).
+In React, to get our timer setup to run when the component mounts, and to get our timer to clear when the component unmounts, we need to use [the useEffect function](/docs/hooks-reference.html#useeffect).
 
-The `useEffect` function takes a function as an argument. The function you pass to `useEffect` gets run when the component mounts. So, to setup the timer when the `Clock` component mounts, you need to call `useEffect` like this:
+The `useEffect` function takes a function as an argument. The function you pass to `useEffect` gets run when the component mounts. So, to setup the timer when the `Clock` component mounts, you need to set up `useEffect` like this:
 
 ```js{1,6}
 useEffect(() => {
@@ -198,9 +225,30 @@ useEffect(() => {
 
 With this code, `setInterval` will get called when our component mounts, and `clearInterval` will get called when our component unmounts.
 
-Let's put this `useEffect` code into our `Clock` component:
+Let's put this `useEffect` code into our `Clock` component.
 
-```js{4-11}
+First, we need to import the `useEffect` function:
+
+```js{1}
+import React, { useState, useEffect } from 'react';
+
+function Clock(props) {
+  const [date, setDate] = useState(new Date())
+
+  return (
+    <div>
+      <h1>Hello, world!</h1>
+      <h2>It is {date.toLocaleTimeString()}.</h2>    
+    </div>
+  );
+}
+```
+
+Second, we need to add the `useEffect` code:
+
+```js{6-13}
+import React, { useState, useEffect } from 'react';
+
 function Clock(props) {
   const [date, setDate] = useState(new Date())
 
@@ -222,67 +270,45 @@ function Clock(props) {
 }
 ```
 
-These methods are called "lifecycle methods".
+Finally, for this all to work, we have to implement a function called `tick()` that the `Clock` component will run every second.
 
-The `componentDidMount()` method runs after the component output has been rendered to the DOM. This is a good place to set up a timer:
+Our `tick` function will use the `setDate` function we got from our `useState` call to schedule updates to the component local state.
 
-```js{2-5}
-  componentDidMount() {
-    this.timerID = setInterval(
-      () => this.tick(),
-      1000
-    );
-  }
+It will look like this:
+
+```js
+tick() {
+  setDate(new Date());
+};
 ```
 
-Note how we save the timer ID right on `this` (`this.timerID`).
+Let's add it to our component:
 
-While `this.props` is set up by React itself and `this.state` has a special meaning, you are free to add additional fields to the class manually if you need to store something that doesn’t participate in the data flow (like a timer ID).
+```js{15-17}
+import React, { useState, useEffect } from 'react';
 
-We will tear down the timer in the `componentWillUnmount()` lifecycle method:
+function Clock(props) {
+  const [date, setDate] = useState(new Date())
 
-```js{2}
-  componentWillUnmount() {
-    clearInterval(this.timerID);
-  }
-```
-
-Finally, we will implement a method called `tick()` that the `Clock` component will run every second.
-
-It will use `this.setState()` to schedule updates to the component local state:
-
-```js{18-22}
-class Clock extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {date: new Date()};
-  }
-
-  componentDidMount() {
-    this.timerID = setInterval(
-      () => this.tick(),
+  useEffect(() => {
+    const timerID = setInterval(
+      () => tick(),
       1000
     );
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.timerID);
-  }
+    
+    return clearInterval(timerID);
+  });
 
   tick() {
-    this.setState({
-      date: new Date()
-    });
-  }
+    setDate(new Date());
+  };
 
-  render() {
-    return (
-      <div>
-        <h1>Hello, world!</h1>
-        <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <h1>Hello, world!</h1>
+      <h2>It is {date.toLocaleTimeString()}.</h2>    
+    </div>
+  );
 }
 
 ReactDOM.render(
@@ -291,21 +317,21 @@ ReactDOM.render(
 );
 ```
 
-[**Try it on CodePen**](https://codepen.io/gaearon/pen/amqdNA?editors=0010)
+<!-- [**Try it on CodePen**](https://codepen.io/gaearon/pen/amqdNA?editors=0010) -->
 
 Now the clock ticks every second.
 
 Let's quickly recap what's going on and the order in which the methods are called:
 
-1) When `<Clock />` is passed to `ReactDOM.render()`, React calls the constructor of the `Clock` component. Since `Clock` needs to display the current time, it initializes `this.state` with an object including the current time. We will later update this state.
+1) When `<Clock />` is passed to `ReactDOM.render()`, React calls the constructor of the `Clock` component. Since `Clock` needs to display the current time, it calls `useState` with an object including the current time. We will later update this state.
 
 2) React then calls the `Clock` component's `render()` method. This is how React learns what should be displayed on the screen. React then updates the DOM to match the `Clock`'s render output.
 
-3) When the `Clock` output is inserted in the DOM, React calls the `componentDidMount()` lifecycle method. Inside it, the `Clock` component asks the browser to set up a timer to call the component's `tick()` method once a second.
+3) When the `Clock` output is inserted in the DOM, React calls `useEffect`. Inside it, the `Clock` component asks the browser to set up a timer to call the component's `tick()` method once a second.
 
-4) Every second the browser calls the `tick()` method. Inside it, the `Clock` component schedules a UI update by calling `setState()` with an object containing the current time. Thanks to the `setState()` call, React knows the state has changed, and calls the `render()` method again to learn what should be on the screen. This time, `this.state.date` in the `render()` method will be different, and so the render output will include the updated time. React updates the DOM accordingly.
+4) Every second the browser calls the `tick()` method. Inside it, the `Clock` component schedules a UI update by calling `setDate()` with an object containing the current time. Thanks to the `setDate()` call, React knows the state has changed, and calls the `render()` method again to learn what should be on the screen. This time, `date` in the `render()` method will be different, and so the render output will include the updated time. React updates the DOM accordingly.
 
-5) If the `Clock` component is ever removed from the DOM, React calls the `componentWillUnmount()` lifecycle method so the timer is stopped.
+5) If the `Clock` component is ever removed from the DOM, React calls the function *returned* by `useEffect()` so the timer is stopped.
 
 ## Using State Correctly {#using-state-correctly}
 
