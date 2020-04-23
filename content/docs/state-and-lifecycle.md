@@ -19,14 +19,14 @@ function tick() {
       <h1>Hello, world!</h1>
       <h2>It is {new Date().toLocaleTimeString()}.</h2>
     </div>
-  );
+  )
   ReactDOM.render(
     element,
     document.getElementById('root')
-  );
+  )
 }
 
-setInterval(tick, 1000);
+setInterval(tick, 1000)
 ```
 
 [**Try it on CodePen**](https://codepen.io/gaearon/pen/gwoJZk?editors=0010)
@@ -42,17 +42,17 @@ function Clock(props) {
       <h1>Hello, world!</h1>
       <h2>It is {props.date.toLocaleTimeString()}.</h2>
     </div>
-  );
+  )
 }
 
 function tick() {
   ReactDOM.render(
     <Clock date={new Date()} />,
     document.getElementById('root')
-  );
+  )
 }
 
-setInterval(tick, 1000);
+setInterval(tick, 1000)
 ```
 
 [**Try it on CodePen**](https://codepen.io/gaearon/pen/dpdoYR?editors=0010)
@@ -65,7 +65,7 @@ Ideally we want to write this once and have the `Clock` update itself:
 ReactDOM.render(
   <Clock />,
   document.getElementById('root')
-);
+)
 ```
 
 To implement this, we need to add "state" to the `Clock` component.
@@ -85,14 +85,14 @@ function Clock(props) {
       <h1>Hello, world!</h1>
       <h2>It is {date.toLocaleTimeString()}.</h2>    
     </div>
-  );
+  )
 }
 ```
 
 2) Import the [useState](/docs/hooks-reference.html#usestate) function from the React library:
 
 ```js{1}
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 
 function Clock(props) {
   return (
@@ -100,7 +100,7 @@ function Clock(props) {
       <h1>Hello, world!</h1>
       <h2>It is {date.toLocaleTimeString()}.</h2>    
     </div>
-  );
+  )
 }
 ```
 <!-- 
@@ -117,7 +117,7 @@ const [date, setDate] = useState(new Date())
 3) Add a [useState](/docs/hooks-reference.html#usestate) call that assigns the initial date to be `new Date()`:
 
 ```js{4}
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 
 function Clock(props) {
   const [date, setDate] = useState(new Date())
@@ -127,7 +127,7 @@ function Clock(props) {
       <h1>Hello, world!</h1>
       <h2>It is {date.toLocaleTimeString()}.</h2>    
     </div>
-  );
+  )
 }
 ```
 <!-- 
@@ -139,7 +139,7 @@ function Clock(props) {
 ReactDOM.render(
   <Clock />,
   document.getElementById('root')
-);
+)
 ```
 
 We will later add the timer code back to the component itself.
@@ -147,7 +147,7 @@ We will later add the timer code back to the component itself.
 The result looks like this:
 
 ```js{1,4,9,15}
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 
 function Clock(props) {
   const [date, setDate] = useState(new Date())
@@ -157,13 +157,13 @@ function Clock(props) {
       <h1>Hello, world!</h1>
       <h2>It is {date.toLocaleTimeString()}.</h2>    
     </div>
-  );
+  )
 }
 
 ReactDOM.render(
   <Clock />,
   document.getElementById('root')
-);
+)
 ```
 
 <!-- TODO: NEW CODEPEN [**Try it on CodePen**](https://codepen.io/gaearon/pen/KgQpJd?editors=0010) -->
@@ -184,7 +184,7 @@ The code for setting up a timer to run a `tick` function every second looks like
 const timerID = setInterval(
   () => tick(),
   1000
-);
+)
 ```
 
 This timer code is all JavaScript so far. No React yet.
@@ -206,8 +206,8 @@ useEffect(() => {
   const timerID = setInterval(
     () => tick(),
     1000
-  );
-});
+  )
+})
 ```
 
 If you want some specific code to run when the component ***un***mounts, you have to make the function you pass to `useEffect` *return* a function that contains that code. We want to clear our timer when the component unmounts, so we need to return a function that clears the timer in `useEffect`, like this:
@@ -217,10 +217,10 @@ useEffect(() => {
   const timerID = setInterval(
     () => tick(),
     1000
-  );
+  )
 
-  return () => clearInterval(timerID);
-});
+  return () => clearInterval(timerID)
+})
 ```
 
 With this code, `setInterval` will get called when our component mounts, and `clearInterval` will get called when our component unmounts.
@@ -230,7 +230,7 @@ Let's put this `useEffect` code into our `Clock` component.
 First, we need to import the `useEffect` function:
 
 ```js{1}
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
 
 function Clock(props) {
   const [date, setDate] = useState(new Date())
@@ -240,14 +240,14 @@ function Clock(props) {
       <h1>Hello, world!</h1>
       <h2>It is {date.toLocaleTimeString()}.</h2>    
     </div>
-  );
+  )
 }
 ```
 
 Second, we need to add the `useEffect` code:
 
 ```js{6-13}
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
 
 function Clock(props) {
   const [date, setDate] = useState(new Date())
@@ -256,17 +256,17 @@ function Clock(props) {
     const timerID = setInterval(
       () => tick(),
       1000
-    );
+    )
     
-    return clearInterval(timerID);
-  });
+    return clearInterval(timerID)
+  })
 
   return (
     <div>
       <h1>Hello, world!</h1>
       <h2>It is {date.toLocaleTimeString()}.</h2>    
     </div>
-  );
+  )
 }
 ```
 
@@ -278,14 +278,14 @@ It will look like this:
 
 ```js
 tick() {
-  setDate(new Date());
-};
+  setDate(new Date())
+}
 ```
 
 Let's add it to our component:
 
 ```js{15-17}
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
 
 function Clock(props) {
   const [date, setDate] = useState(new Date())
@@ -294,27 +294,27 @@ function Clock(props) {
     const timerID = setInterval(
       () => tick(),
       1000
-    );
+    )
     
-    return clearInterval(timerID);
-  });
+    return clearInterval(timerID)
+  })
 
   tick() {
-    setDate(new Date());
-  };
+    setDate(new Date())
+  }
 
   return (
     <div>
       <h1>Hello, world!</h1>
       <h2>It is {date.toLocaleTimeString()}.</h2>    
     </div>
-  );
+  )
 }
 
 ReactDOM.render(
   <Clock />,
   document.getElementById('root')
-);
+)
 ```
 
 <!-- [**Try it on CodePen**](https://codepen.io/gaearon/pen/amqdNA?editors=0010) -->
@@ -344,14 +344,14 @@ For example, this will not re-render a component:
 ```js
 const [comment, setComment] = useState('some comment')
 // Wrong
-comment = 'some new comment';
+comment = 'some new comment'
 ```
 
 Instead, use `setComment()`:
 
 ```js
 // Correct
-setComment('some new comment');
+setComment('some new comment')
 ```
 
 The only way you can change a variable you get from calling `useState` is with the `set` function it returns (`setComment` in this example).
@@ -388,7 +388,7 @@ The `FormattedDate` component would receive the `date` in its props and wouldn't
 
 ```js
 function FormattedDate(props) {
-  return <h2>It is {props.date.toLocaleTimeString()}.</h2>;
+  return <h2>It is {props.date.toLocaleTimeString()}.</h2>
 }
 ```
 
@@ -408,13 +408,13 @@ function App() {
       <Clock />
       <Clock />
     </div>
-  );
+  )
 }
 
 ReactDOM.render(
   <App />,
   document.getElementById('root')
-);
+)
 ```
 
 [**Try it on CodePen**](https://codepen.io/gaearon/pen/vXdGmd?editors=0010)
