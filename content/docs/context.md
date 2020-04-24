@@ -212,7 +212,7 @@ MyContext.displayName = 'MyDisplayName';
 ```
 
 ## Examples {#examples}
-
+<!-- 
 ### Dynamic Context {#dynamic-context}
 
 A more complex example with dynamic values for the theme:
@@ -224,9 +224,9 @@ A more complex example with dynamic values for the theme:
 `embed:context/theme-detailed-themed-button.js`
 
 **app.js**
-`embed:context/theme-detailed-app.js`
+`embed:context/theme-detailed-app.js` -->
 
-### Updating Context from a Nested Component {#updating-context-from-a-nested-component}
+<!-- ### Updating Context from a Nested Component {#updating-context-from-a-nested-component}
 
 It is often necessary to update the context from a component that is nested somewhere deeply in the component tree. In this case you can pass a function down through the context to allow consumers to update the context:
 
@@ -237,7 +237,7 @@ It is often necessary to update the context from a component that is nested some
 `embed:context/updating-nested-context-theme-toggler-button.js`
 
 **app.js**
-`embed:context/updating-nested-context-app.js`
+`embed:context/updating-nested-context-app.js` -->
 
 ### Consuming Multiple Contexts {#consuming-multiple-contexts}
 
