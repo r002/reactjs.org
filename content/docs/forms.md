@@ -60,13 +60,7 @@ function NameForm() {
 
 Since the `value` attribute is set on our form element, the displayed value will always be `value`, making the React state the source of truth. Since `handleChange` runs on every keystroke to update the React state, the displayed value will update as the user types.
 
-With a controlled component, every state mutation will have an associated handler function. This makes it straightforward to modify or validate user input. For example, if we wanted to enforce that names are written with all uppercase letters, we could write `handleChange` as:
-
-```javascript{2}
-function handleChange(event) {
-  setValue(event.target.value.toUpperCase())
-}
-```
+With a controlled component, the input's value is always driven by the React state. While this means you have to type a bit more code, you can now pass the value to other UI elements too, or reset it from other event handlers.
 
 ## The textarea Tag {#the-textarea-tag}
 
