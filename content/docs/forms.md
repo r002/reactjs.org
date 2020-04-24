@@ -35,11 +35,11 @@ For example, if we want to make the previous example log the name when it is sub
 function NameForm() {
   [value, setValue] = useState('')
 
-  handleChange(event) {
+  function handleChange(event) {
     setValue(event.target.value)
   }
 
-  handleSubmit(event) {
+  function handleSubmit(event) {
     alert('A name was submitted: ' + value)
     event.preventDefault()
   }
@@ -63,7 +63,7 @@ Since the `value` attribute is set on our form element, the displayed value will
 With a controlled component, every state mutation will have an associated handler function. This makes it straightforward to modify or validate user input. For example, if we wanted to enforce that names are written with all uppercase letters, we could write `handleChange` as:
 
 ```javascript{2}
-handleChange(event) {
+function handleChange(event) {
   setValue(event.target.value.toUpperCase())
 }
 ```
@@ -84,11 +84,11 @@ In React, a `<textarea>` uses a `value` attribute instead. This way, a form usin
 function EssayForm() {
     [value, setValue] = useState('Please write an essay about your favorite DOM element.')
 
-  handleChange(event) {
+  function handleChange(event) {
     setValue(event.target.value)
   }
 
-  handleSubmit(event) {
+  function handleSubmit(event) {
     alert('An essay was submitted: ' + value)
     event.preventDefault()
   }
@@ -126,11 +126,11 @@ Note that the Coconut option is initially selected, because of the `selected` at
 function FlavorForm() {
   [value, setValue] = useState('coconut')
 
-  handleChange(event) {
+  function handleChange(event) {
     setValue(event.target.value)
   }
 
-  handleSubmit(event) {
+  function handleSubmit(event) {
     alert('Your favorite flavor is: ' + value)
     event.preventDefault()
   }
@@ -185,7 +185,7 @@ function Reservation() {
   [isGoing, setIsGoing] = useState(true)
   [numberOfGuests, setNumberOfGuests] = useState(2)
 
-  handleInputChange(event) {
+  function handleInputChange(event) {
     const target = event.target
     const name = target.name
     const value = name === 'isGoing' ? target.checked : target.value
@@ -194,29 +194,27 @@ function Reservation() {
     if (name === 'numberOfGuests') { setNumberOfGuests(value) }
   }
 
-  render() {
-    return (
-      <form>
-        <label>
-          Is going:
-          <input
-            name="isGoing"
-            type="checkbox"
-            checked={isGoing}
-            onChange={handleInputChange} />
-        </label>
-        <br />
-        <label>
-          Number of guests:
-          <input
-            name="numberOfGuests"
-            type="number"
-            value={numberOfGuests}
-            onChange={handleInputChange} />
-        </label>
-      </form>
-    );
-  }
+  return (
+    <form>
+      <label>
+        Is going:
+        <input
+          name="isGoing"
+          type="checkbox"
+          checked={isGoing}
+          onChange={handleInputChange} />
+      </label>
+      <br />
+      <label>
+        Number of guests:
+        <input
+          name="numberOfGuests"
+          type="number"
+          value={numberOfGuests}
+          onChange={handleInputChange} />
+      </label>
+    </form>
+  )
 }
 ```
 
