@@ -18,10 +18,10 @@ As such, for now the sidebar link to [the higher order components page](content/
 
 ### Unsure about the best way to get a reference to the current component's el
 
-In [the integrating with other libraries doc](content/docs/integrating-with-other-libraries.md), this is done via a class component. Not what the best practice is for a functional component.
+In [the integrating with other libraries doc](/content/docs/integrating-with-other-libraries.md), this is done via a class component. Not what the best practice is for a functional component.
 ### Unsure how to adapt examples in the "extracting data from backbone models" section
 
-[This section](/docs/integrating-with-other-libraries.md#extracting-data-from-backbone-models) is pretty complex.
+[This section](/content/docs/integrating-with-other-libraries.md#extracting-data-from-backbone-models) is pretty complex.
 
 ## Getting started
 
