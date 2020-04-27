@@ -10,7 +10,7 @@ Not sure what the best practice is for [context updating](content/docs/context.m
 
 ### Error boundaries are not currently possible using hooks
 
-As such, the sidebar link to [the error boundaries page](content/docs/error-boundaries.md) has been removed.
+As such, for now the sidebar link to [the error boundaries page](content/docs/error-boundaries.md) has been removed.
 
 ### Unsure what the remaining useful usages are for Higher Order Components
 
