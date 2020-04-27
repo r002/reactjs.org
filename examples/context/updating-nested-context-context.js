@@ -1,7 +1,4 @@
-// Make sure the shape of the default value passed to
-// createContext matches the shape that the consumers expect!
-// highlight-range{2-3}
-export const ThemeContext = React.createContext({
-  theme: themes.dark,
-  toggleTheme: () => {},
-});
+// You need to be able to pass down an update function as well.
+// highlight-range{2}
+export const ThemeContext = React.createContext(themes.dark)
+export const ToggleThemeContext = React.createContext(() => {})

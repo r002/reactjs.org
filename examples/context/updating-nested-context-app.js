@@ -1,37 +1,28 @@
-import {ThemeContext, themes} from './theme-context';
+import { ThemeContext, ToggleThemeContext, themes } from './theme-context';
 import ThemeTogglerButton from './theme-toggler-button';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
+function App() {
+  [theme, setTheme] = useState(themes.light)
 
-    this.toggleTheme = () => {
-      this.setState(state => ({
-        theme:
-          state.theme === themes.dark
-            ? themes.light
-            : themes.dark,
-      }));
-    };
-
-    // highlight-range{1-2,5}
-    // State also contains the updater function so it will
-    // be passed down into the context provider
-    this.state = {
-      theme: themes.light,
-      toggleTheme: this.toggleTheme,
-    };
+  function toggleTheme() {
+    setTheme(currentTheme => {
+      return currentTheme === themes.dark
+        ? themes.light
+        : themes.dark
+    })
   }
 
-  render() {
-    // highlight-range{1,3}
-    // The entire state is passed to the provider
-    return (
-      <ThemeContext.Provider value={this.state}>
+  // highlight-range{1-3,6}
+  // The toggleTheme function is provided via
+  // the ToggleThemeContext so it will be passed 
+  // down as well
+  return (
+    <ThemeContext.Provider value={theme}>
+      <ToggleThemeContext.Provider value={toggleTheme}>
         <Content />
-      </ThemeContext.Provider>
-    );
-  }
+      </ToggleThemeContext.Provider >
+    </ThemeContext.Provider >
+  )
 }
 
 function Content() {

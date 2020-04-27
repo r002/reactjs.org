@@ -35,5 +35,5 @@ function ThemedButton() {
   // In this example, the current theme is "dark".
   const theme = useContext(ThemeContext)
 
-  return <Button theme={this.context} />
+  return <Button theme={theme} />
 }

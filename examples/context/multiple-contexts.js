@@ -31,16 +31,11 @@ function Layout() {
 
 // A component may consume multiple contexts
 function Content() {
-  // highlight-range{2-10}
+  // highlight-range{1-2,5}
+  const theme = useContext(ThemeContext)
+  const user = useContext(UserContext)
+
   return (
-    <ThemeContext.Consumer>
-      {theme => (
-        <UserContext.Consumer>
-          {user => (
-            <ProfilePage user={user} theme={theme} />
-          )}
-        </UserContext.Consumer>
-      )}
-    </ThemeContext.Consumer>
-  );
+    <ProfilePage user={user} theme={theme} />
+  )
 }
