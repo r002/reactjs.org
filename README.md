@@ -1,6 +1,24 @@
 # reactjs.org
 
-This repo contains the source code and documentation powering [reactjs.org](https://reactjs.org/).
+This repo contains a modified version of the source code and documentation powering [reactjs.org](https://reactjs.org/). The goal is to create a version of the React documentation that is as useful as possible for learners who are both just starting out with React and learning the React Hooks style of doing things.
+
+## Unresolved issues with modifying the docs to be 100% hooks
+
+### Context update functions are awkward
+
+Not sure what the best practice is for [context updating](content/docs/context.md#updating-context-from-a-nested-component). The old way required putting the context update function in the app state, but this is a lot more verbose with hooks, and requires two providers to avoid the rendering issue mentioned in [the caveats section](content/docs/context.md#caveats).
+
+### Error boundaries are not currently possible using hooks
+
+As such, the sidebar link to [the error boundaries page](content/docs/error-boundaries.md) has been removed.
+
+### Unsure what the remaining useful usages are for Higher Order Components
+
+As such, for now the sidebar link to [the higher order components page](content/docs/higher-order-components.md) has been removed.
+
+### Unsure how to get a reference to the current component's el
+
+In [the integrating with other libraries doc](content/docs/integrating-with-other-libraries.md), this is done via a class component using `this.el`. Not sure how to grab that without that reference.
 
 ## Getting started
 
