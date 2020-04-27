@@ -45,14 +45,10 @@
       title: Code-Splitting
     - id: context
       title: Context
-    - id: error-boundaries
-      title: Error Boundaries
     - id: forwarding-refs
       title: Forwarding Refs
     - id: fragments
       title: Fragments
-    - id: higher-order-components
-      title: Higher-Order Components
     - id: integrating-with-other-libraries
       title: Integrating with Other Libraries
     - id: jsx-in-depth
