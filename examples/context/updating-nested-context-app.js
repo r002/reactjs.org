@@ -12,13 +12,18 @@ function App() {
     })
   }
 
+  // highlight-range{1-3}
+  // State also contains the updater function so it will
+  // be passed down into the context provider
+  statelyToggleTheme = useState(toggleTheme)[0]
+
   // highlight-range{1-3,6}
   // The toggleTheme function is provided via
   // the ToggleThemeContext so it will be passed 
   // down as well
   return (
     <ThemeContext.Provider value={theme}>
-      <ToggleThemeContext.Provider value={toggleTheme}>
+      <ToggleThemeContext.Provider value={statelyToggleTheme}>
         <Content />
       </ToggleThemeContext.Provider >
     </ThemeContext.Provider >
