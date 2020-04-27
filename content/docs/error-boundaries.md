@@ -9,6 +9,11 @@ In the past, JavaScript errors inside components used to corrupt React’s inter
 
 ## Introducing Error Boundaries {#introducing-error-boundaries}
 
+> Note
+>
+> **Error boundaries only work with components created via the older React `class` syntax**. As such, the examples in this section will look different from those in the rest of the docs, and may be unfamiliar if you started learning React after hooks were added.
+>
+
 A JavaScript error in a part of the UI shouldn’t break the whole app. To solve this problem for React users, React 16 introduces a new concept of an “error boundary”.
 
 Error boundaries are React components that **catch JavaScript errors anywhere in their child component tree, log those errors, and display a fallback UI** instead of the component tree that crashed. Error boundaries catch errors during rendering, in lifecycle methods, and in constructors of the whole tree below them.
