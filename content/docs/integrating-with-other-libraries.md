@@ -18,28 +18,26 @@ The easiest way to avoid conflicts is to prevent the React component from updati
 
 To demonstrate this, let's sketch out a wrapper for a generic jQuery plugin.
 
-We will attach a [ref](/docs/refs-and-the-dom.html) to the root DOM element. Inside `componentDidMount`, we will get a reference to it so we can pass it to the jQuery plugin.
+We will attach a [ref](/docs/refs-and-the-dom.html) to the root DOM element. Inside `useEffect`, we will get a reference to it so we can pass it to the jQuery plugin.
 
-To prevent React from touching the DOM after mounting, we will return an empty `<div />` from the `render()` method. The `<div />` element has no properties or children, so React has no reason to update it, leaving the jQuery plugin free to manage that part of the DOM:
+To prevent React from touching the DOM after mounting, the component will render an empty `<div />`. The `<div />` element has no properties or children, so React has no reason to update it, leaving the jQuery plugin free to manage that part of the DOM:
 
-```js{3,4,8,12}
-class SomePlugin extends React.Component {
-  componentDidMount() {
-    this.$el = $(this.el);
-    this.$el.somePlugin();
-  }
+```js{2,6,8,12}
+function SomePlugin() {
+  [el, setEl] = useState(null)
 
-  componentWillUnmount() {
-    this.$el.somePlugin('destroy');
-  }
+  useEffect(() => {
+    const $el = $(el)
+    $el.somePlugin()
 
-  render() {
-    return <div ref={el => this.el = el} />;
-  }
+    return () => $el.somePlugin('destroy')
+  }, [el])
+
+  return <div ref={setEl} />
 }
 ```
 
-Note that we defined both `componentDidMount` and `componentWillUnmount` [lifecycle methods](/docs/react-component.html#the-component-lifecycle). Many jQuery plugins attach event listeners to the DOM so it's important to detach them in `componentWillUnmount`. If the plugin does not provide a method for cleanup, you will probably have to provide your own, remembering to remove any event listeners the plugin registered to prevent memory leaks.
+Note that we give `useEffect` a function **with a return**. Many jQuery plugins attach event listeners to the DOM so it's important to detach them using the `return`. If the plugin does not provide a method for cleanup, you will probably have to provide your own, remembering to remove any event listeners the plugin registered to prevent memory leaks.
 
 ### Integrating with jQuery Chosen Plugin {#integrating-with-jquery-chosen-plugin}
 
@@ -69,80 +67,87 @@ function Example() {
 
 We will implement it as an [uncontrolled component](/docs/uncontrolled-components.html) for simplicity.
 
-First, we will create an empty component with a `render()` method where we return `<select>` wrapped in a `<div>`:
+First, we will create a component where we return `<select>` wrapped in a `<div>`, with `ref` set to a state variable:
 
-```js{4,5}
-class Chosen extends React.Component {
-  render() {
-    return (
-      <div>
-        <select className="Chosen-select" ref={el => this.el = el}>
-          {this.props.children}
-        </select>
-      </div>
-    );
-  }
+```js{5,6}
+function Chosen(props) {
+  const [el, setEl] = React.useState(null)
+
+  return (
+    <div>
+      <select className="Chosen-select" ref={setEl}>
+        {props.children}
+      </select>
+    </div>
+  )
 }
 ```
 
 Notice how we wrapped `<select>` in an extra `<div>`. This is necessary because Chosen will append another DOM element right after the `<select>` node we passed to it. However, as far as React is concerned, `<div>` always only has a single child. This is how we ensure that React updates won't conflict with the extra DOM node appended by Chosen. It is important that if you modify the DOM outside of React flow, you must ensure React doesn't have a reason to touch those DOM nodes.
 
-Next, we will implement the lifecycle methods. We need to initialize Chosen with the ref to the `<select>` node in `componentDidMount`, and tear it down in `componentWillUnmount`:
+Next, we will add `useEffect`. We need to initialize Chosen with the ref to the `<select>` node, and we need tear it down when we're done.
 
-```js{2,3,7}
-componentDidMount() {
-  this.$el = $(this.el);
-  this.$el.chosen();
-}
+```js{2,3,5}
+useEffect(() => {
+  $el = $(el)
+  $el.chosen()
 
-componentWillUnmount() {
-  this.$el.chosen('destroy');
-}
+  return () => $el.chosen('destroy')
+}, [el])
 ```
 
-[**Try it on CodePen**](https://codepen.io/gaearon/pen/qmqeQx?editors=0010)
+<!-- [**Try it on CodePen**](https://codepen.io/gaearon/pen/qmqeQx?editors=0010) -->
 
-Note that React assigns no special meaning to the `this.el` field. It only works because we have previously assigned this field from a `ref` in the `render()` method:
+A few things to note:
+
+1) React assigns no special meaning to `el`. It only works because we have previously assigned this field from a `ref`:
 
 ```js
-<select className="Chosen-select" ref={el => this.el = el}>
+<select className="Chosen-select" ref={setEl}>
+```
+
+2) We pass `[el]` to our `useEffect` call so that it only gets called when the value of `el` changes. Without this, `chosen` will be setup and torn down after every single render.
+
+```js{6}
+useEffect(() => {
+  $el = $(el)
+  $el.chosen()
+
+  return () => $el.chosen('destroy')
+}, [el])
 ```
 
 This is enough to get our component to render, but we also want to be notified about the value changes. To do this, we will subscribe to the jQuery `change` event on the `<select>` managed by Chosen.
 
-We won't pass `this.props.onChange` directly to Chosen because component's props might change over time, and that includes event handlers. Instead, we will declare a `handleChange()` method that calls `this.props.onChange`, and subscribe it to the jQuery `change` event:
+We won't pass `props.onChange` directly to Chosen because component's props might change over time, and that includes event handlers. Instead, we will declare a `handleChange()` function that calls `props.onChange`, and subscribe it to the jQuery `change` event:
 
 ```js{5,6,10,14-16}
-componentDidMount() {
-  this.$el = $(this.el);
-  this.$el.chosen();
+useEffect(() => {
+  const $el = $(el)
+  $el.chosen()
+  $el.on('change', handleChange);
 
-  this.handleChange = this.handleChange.bind(this);
-  this.$el.on('change', this.handleChange);
-}
+  return () => {
+    $el.off('change', handleChange);
+    $el.chosen('destroy')
+  }
+}, [el])
 
-componentWillUnmount() {
-  this.$el.off('change', this.handleChange);
-  this.$el.chosen('destroy');
-}
-
-handleChange(e) {
-  this.props.onChange(e.target.value);
+function handleChange(e) {
+  props.onChange(e.target.value);
 }
 ```
 
-[**Try it on CodePen**](https://codepen.io/gaearon/pen/bWgbeE?editors=0010)
+<!-- [**Try it on CodePen**](https://codepen.io/gaearon/pen/bWgbeE?editors=0010) -->
 
 Finally, there is one more thing left to do. In React, props can change over time. For example, the `<Chosen>` component can get different children if parent component's state changes. This means that at integration points it is important that we manually update the DOM in response to prop updates, since we no longer let React manage the DOM for us.
 
-Chosen's documentation suggests that we can use jQuery `trigger()` API to notify it about changes to the original DOM element. We will let React take care of updating `this.props.children` inside `<select>`, but we will also add a `componentDidUpdate()` lifecycle method that notifies Chosen about changes in the children list:
+Chosen's documentation suggests that we can use jQuery `trigger()` API to notify it about changes to the original DOM element. We will let React take care of updating `props.children` inside `<select>`, but we will also add a `useEffect()` call that notifies Chosen about changes in the children list:
 
 ```js{2,3}
-componentDidUpdate(prevProps) {
-  if (prevProps.children !== this.props.children) {
-    this.$el.trigger("chosen:updated");
-  }
-}
+useEffect(() => {
+  $(el).trigger("chosen:updated")
+}, [el, props.children])
 ```
 
 This way, Chosen will know to update its DOM element when the `<select>` children managed by React change.
@@ -150,43 +155,31 @@ This way, Chosen will know to update its DOM element when the `<select>` childre
 The complete implementation of the `Chosen` component looks like this:
 
 ```js
-class Chosen extends React.Component {
-  componentDidMount() {
-    this.$el = $(this.el);
-    this.$el.chosen();
+function Chosen(props) {
+  const [el, setEl] = useState(null)
 
-    this.handleChange = this.handleChange.bind(this);
-    this.$el.on('change', this.handleChange);
-  }
+  useEffect(() => {
+    const $el = $(el)
+    $el.chosen()
+
+    return () => $el.chosen('destroy')
+  }, [el])
   
-  componentDidUpdate(prevProps) {
-    if (prevProps.children !== this.props.children) {
-      this.$el.trigger("chosen:updated");
-    }
-  }
-
-  componentWillUnmount() {
-    this.$el.off('change', this.handleChange);
-    this.$el.chosen('destroy');
-  }
+  useEffect(() => {
+    $(el).trigger("chosen:updated")
+  }, [el, props.children])
   
-  handleChange(e) {
-    this.props.onChange(e.target.value);
-  }
-
-  render() {
-    return (
-      <div>
-        <select className="Chosen-select" ref={el => this.el = el}>
-          {this.props.children}
-        </select>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <select className="Chosen-select" ref={setEl}>
+        {props.children}
+      </select>
+    </div>
+  )
 }
 ```
 
-[**Try it on CodePen**](https://codepen.io/gaearon/pen/xdgKOz?editors=0010)
+<!-- [**Try it on CodePen**](https://codepen.io/gaearon/pen/xdgKOz?editors=0010) -->
 
 ## Integrating with Other View Libraries {#integrating-with-other-view-libraries}
 
@@ -293,61 +286,43 @@ Components responsible for rendering models would listen to `'change'` events, w
 
 In the example below, the `List` component renders a Backbone collection, using the `Item` component to render individual items.
 
-```js{1,7-9,12,16,24,30-32,35,39,46}
-class Item extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleChange = this.handleChange.bind(this);
-  }
+The `forceUpdate` function is used to make sure the component rerenders when changes happen. It is adapted from [this example](/docs/hooks-faq.html#is-there-something-like-forceupdate).
 
-  handleChange() {
-    this.forceUpdate();
-  }
+```js{1,2,3,6,8,11,14,15,16,19,21,27}
+function Item(props) {
+  const [ignored, changeUpdateValue] = useState(0);
+  const forceUpdate = () => changeUpdateValue(cur => cur + 1)
 
-  componentDidMount() {
-    this.props.model.on('change', this.handleChange);
-  }
+  useEffect(() => {
+    props.model.on('change', forceUpdate)
 
-  componentWillUnmount() {
-    this.props.model.off('change', this.handleChange);
-  }
+    return () => props.model.off('change', forceUpdate)
+  })
 
-  render() {
-    return <li>{this.props.model.get('text')}</li>;
-  }
+  return <li>{props.model.get('text')}</li>
 }
 
-class List extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleChange = this.handleChange.bind(this);
-  }
+function List(props) {
+  const [ignored, changeUpdateValue] = useState(0)
+  const forceUpdate = () => changeUpdateValue(cur => cur + 1)
 
-  handleChange() {
-    this.forceUpdate();
-  }
+  useEffect(() => {
+    props.collection.on('add', 'remove', forceUpdate)
 
-  componentDidMount() {
-    this.props.collection.on('add', 'remove', this.handleChange);
-  }
+    return () => props.collection.off('add', 'remove', forceUpdate)
+  })
 
-  componentWillUnmount() {
-    this.props.collection.off('add', 'remove', this.handleChange);
-  }
-
-  render() {
-    return (
-      <ul>
-        {this.props.collection.map(model => (
-          <Item key={model.cid} model={model} />
-        ))}
-      </ul>
-    );
-  }
+  return (
+    <ul>
+      {props.collection.map(model => (
+        <Item key={model.cid} model={model} />
+      ))}
+    </ul>
+  )
 }
 ```
 
-[**Try it on CodePen**](https://codepen.io/gaearon/pen/GmrREm?editors=0010)
+<!-- [**Try it on CodePen**](https://codepen.io/gaearon/pen/GmrREm?editors=0010) -->
 
 ### Extracting Data from Backbone Models {#extracting-data-from-backbone-models}
 
