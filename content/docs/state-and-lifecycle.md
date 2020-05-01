@@ -103,16 +103,18 @@ function Clock(props) {
   )
 }
 ```
-<!-- 
-[useState](/docs/hooks-reference.html#usestate) is a special React function that lets us create "state" data that React can understand, monitor, and change. Whenever any "state" data created with `useState` changes, React will re-render the DOM and update it accordingly.
 
-A `useState` call sets an initial value for a piece of "state", and gives back the current value of that data, and a function that can change the data. For example, in this `useState` call:
+[useState](/docs/hooks-reference.html#usestate) is a React function that returns two things: a value and a function to change that value. For example, to store the current time in this example, we will call `useState` to generate a value `date`, and a function `setDate` to update it. Whenever we call `setDate`, React will re-render the DOM to show the new `date` value.
+
+The line calling `useState` will look like this:
 
 ```js
 const [date, setDate] = useState(new Date())
 ```
 
-`useState(new Date())` sets the state's initial value to `new Date()`. `const [date, setDate] = ` puts the state in a variable `date`, and puts the function that will let us change the data into a variable `setDate`. -->
+Passing `new Date()` to `useState` sets the initial value to `new Date()`. `const [date, setDate] = useState(new Date())` stores the current value in `date`, and puts the function that will let us update that value in `setDate`.
+
+With that explanation out of the way, we're ready for step 3:
 
 3) Add a [useState](/docs/hooks-reference.html#usestate) call that assigns the initial date to be `new Date()`:
 
@@ -130,8 +132,6 @@ function Clock(props) {
   )
 }
 ```
-<!-- 
-[useState](/docs/hooks-reference.html#usestate) is a special function that returns two things: a value and a function to change that value. In `const [date, setDate] = useState(new Date())`, the `useState(new Date())` adds a new value to React's state, and sets that value to be `new Date()`. The `const [date, setDate] = ` part puts the value in a variable called `date`, and puts the function that changes the value in a variable called `setDate`. -->
 
 4) Remove the `date` prop from the `<Clock />` element:
 
@@ -323,13 +323,13 @@ Now the clock ticks every second.
 
 Let's quickly recap what's going on and the order in which the methods are called:
 
-1) When `<Clock />` is passed to `ReactDOM.render()`, React calls the constructor of the `Clock` component. Since `Clock` needs to display the current time, it calls `useState` with an object including the current time. We will later update this state.
+1) When `<Clock />` is passed to `ReactDOM.render()`, React calls the `Clock` component function. Since `Clock` needs to display the current time, it calls `useState` with an object including the current time. We will later update this state.
 
-2) React then calls the `Clock` component's `render()` method. This is how React learns what should be displayed on the screen. React then updates the DOM to match the `Clock`'s render output.
+2) React then calls the `Clock` component function. This is how React learns what should be displayed on the screen. React then updates the DOM to match the `Clock` function's output.
 
 3) When the `Clock` output is inserted in the DOM, React calls `useEffect`. Inside it, the `Clock` component asks the browser to set up a timer to call the component's `tick()` method once a second.
 
-4) Every second the browser calls the `tick()` method. Inside it, the `Clock` component schedules a UI update by calling `setDate()` with an object containing the current time. Thanks to the `setDate()` call, React knows the state has changed, and calls the `render()` method again to learn what should be on the screen. This time, `date` in the `render()` method will be different, and so the render output will include the updated time. React updates the DOM accordingly.
+4) Every second the browser calls the `tick()` method. Inside it, the `Clock` component schedules a UI update by calling `setDate()` with an object containing the current time. Thanks to the `setDate()` call, React knows that `date` has changed, and calls the `Clock` function again to learn what should be on the screen. This time, `date` in the `Clock` function will be different, and so the output will include the updated time. React updates the DOM accordingly.
 
 5) If the `Clock` component is ever removed from the DOM, React calls the function *returned* by `useEffect()` so the timer is stopped.
 
