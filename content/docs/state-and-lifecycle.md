@@ -321,15 +321,15 @@ ReactDOM.render(
 
 Now the clock ticks every second.
 
-Let's quickly recap what's going on and the order in which the methods are called:
+Let's quickly recap what's going on and the order in which the functions are called:
 
 1) When `<Clock />` is passed to `ReactDOM.render()`, React calls the `Clock` component function. Since `Clock` needs to display the current time, it calls `useState` with an object including the current time. We will later update this state.
 
 2) React then calls the `Clock` component function. This is how React learns what should be displayed on the screen. React then updates the DOM to match the `Clock` function's output.
 
-3) When the `Clock` output is inserted in the DOM, React calls `useEffect`. Inside it, the `Clock` component asks the browser to set up a timer to call the component's `tick()` method once a second.
+3) When the `Clock` output is inserted in the DOM, React calls `useEffect`. Inside it, the `Clock` component asks the browser to set up a timer to call the component's `tick()` function once a second.
 
-4) Every second the browser calls the `tick()` method. Inside it, the `Clock` component schedules a UI update by calling `setDate()` with an object containing the current time. Thanks to the `setDate()` call, React knows that `date` has changed, and calls the `Clock` function again to learn what should be on the screen. This time, `date` in the `Clock` function will be different, and so the output will include the updated time. React updates the DOM accordingly.
+4) Every second the browser calls the `tick()` function. Inside it, the `Clock` component schedules a UI update by calling `setDate()` with an object containing the current time. Thanks to the `setDate()` call, React knows that `date` has changed, and calls the `Clock` function again to learn what should be on the screen. This time, `date` in the `Clock` function will be different, and so the output will include the updated time. React updates the DOM accordingly.
 
 5) If the `Clock` component is ever removed from the DOM, React calls the function *returned* by `useEffect()` so the timer is stopped.
 
