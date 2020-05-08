@@ -61,7 +61,7 @@ const Header = ({location}: {location: Location}) => (
             },
 
             [media.greaterThan('small')]: {
-              width: 'calc(100% / 6)',
+              width: 'calc(100% / 5.75)',
             },
             [media.lessThan('small')]: {
               flex: '0 0 auto',
@@ -92,7 +92,7 @@ const Header = ({location}: {location: Location}) => (
                 border: 0,
               },
             }}>
-            React with Hooks
+            React with&nbsp;Hooks
           </span>
         </Link>
 
