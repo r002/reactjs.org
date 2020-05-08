@@ -92,7 +92,7 @@ const Header = ({location}: {location: Location}) => (
                 border: 0,
               },
             }}>
-            React
+            React with Hooks
           </span>
         </Link>
 
