@@ -55,7 +55,7 @@ There are two ways to complete this tutorial: you can either write the code in y
 
 This is the quickest way to get started!
 
-First, open this **[Starter Code](https://codepen.io/gaearon/pen/oWWQNa?editors=0010)** in a new tab. The new tab should display an empty tic-tac-toe game board and React code. We will be editing the React code in this tutorial.
+First, open this **[Starter Code](https://codepen.io/kickstartcoding/pen/QWjmyBd)** in a new tab. The new tab should display an empty tic-tac-toe game board and React code. We will be editing the React code in this tutorial.
 
 You can now skip the second setup option, and go to the [Overview](#overview) section to get an overview of React.
 
@@ -877,7 +877,7 @@ Finally, we need to move the `handleClick` function from the Board component to 
 
 At this point, the Board component only needs the `renderSquare` function. The game's state and the `handleClick` function should be in the Game component.
 
-**[View the full code at this point](https://codepen.io/kickstartcoding/pen/WNQzgJw?editors=0011)**
+**[View the full code at this point](https://codepen.io/kickstartcoding/pen/WNQzgJw?editors=0010)**
 
 ### Showing the Past Moves {#showing-the-past-moves}
 
@@ -934,7 +934,7 @@ Let's `map` over the `history` in the Game:
   );
 ```
 
-**[View the full code at this point](https://codepen.io/gaearon/pen/EmmGEa?editors=0010)**
+**[View the full code at this point](https://codepen.io/kickstartcoding/pen/qBOoMJJ)**
 
 For each move in the tic-tac-toes's game's history, we create a list item `<li>` which contains a button `<button>`. The button has a `onClick` handler which calls a function called `jumpTo()`. We haven't implemented the `jumpTo()` function yet. For now, we should see a list of the moves that have occurred in the game and a warning in the developer tools console that says:
 
