@@ -9,8 +9,6 @@ more:
   items:
     - title: Tutorial
       to: /tutorial/tutorial.html
-    - title: Blog
-      to: /blog
     - title: Acknowledgements
       to: /acknowledgements.html
     - title: React Native
