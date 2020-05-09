@@ -24,7 +24,7 @@ To prevent React from touching the DOM after mounting, the component will render
 
 ```js{2,6,8,12}
 function SomePlugin() {
-  [el, setEl] = useState(null)
+  const [el, setEl] = useState(null)
 
   useEffect(() => {
     const $el = $(el)

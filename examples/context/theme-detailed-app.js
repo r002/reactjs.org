@@ -12,7 +12,7 @@ function Toolbar(props) {
 }
 
 function App() {
-  [theme, setTheme] = useState(themes.light)
+  const [theme, setTheme] = useState(themes.light)
 
   function toggleTheme() {
     setTheme(currentTheme => {
