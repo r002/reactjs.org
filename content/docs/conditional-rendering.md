@@ -77,7 +77,7 @@ It will render either `<LoginButton />` or `<LogoutButton />` depending on its c
 ```javascript{15-19,23,24}
 function LoginControl() {
 
-  [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   function handleLoginClick() {
     setIsLoggedIn(true)
@@ -109,7 +109,7 @@ ReactDOM.render(
 );
 ```
 
-<!-- [**Try it on CodePen**](https://codepen.io/gaearon/pen/QKzAgB?editors=0010) -->
+[**Try it on CodePen**](https://codepen.io/kickstartcoding/pen/PoPRLeB?editors=0010)
 
 While declaring a variable and using an `if` statement is a fine way to conditionally render a component, sometimes you might want to use a shorter syntax. There are a few ways to inline conditions in JSX, explained below.
 
@@ -190,9 +190,9 @@ function WarningBanner(props) {
 }
 
 function Page() {
-  [showWarning, setShowWarning] = useState(true)
+  const [showWarning, setShowWarning] = useState(true)
 
-  handleToggleClick() {
+  function handleToggleClick() {
     setShowWarning(!showWarning)
   }
 
@@ -212,6 +212,6 @@ ReactDOM.render(
 );
 ```
 
-<!-- [**Try it on CodePen**](https://codepen.io/gaearon/pen/Xjoqwm?editors=0010) -->
+[**Try it on CodePen**](https://codepen.io/kickstartcoding/pen/MWaVxXW?editors=0010)
 
 Returning `null` from a component does not affect the firing of the `useEffect` calls. If we had calls to `useEffect` in the `WarningBanner component, they would still run.

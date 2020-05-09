@@ -154,7 +154,7 @@ function SignUpDialog() {
 }
 ```
 
-<!-- [**Try it on CodePen**](https://codepen.io/gaearon/pen/gwZbYa?editors=0010) -->
+[**Try it on CodePen**](https://codepen.io/kickstartcoding/pen/LYpdamy?editors=0010)
 
 ## So What About Inheritance? {#so-what-about-inheritance}
 

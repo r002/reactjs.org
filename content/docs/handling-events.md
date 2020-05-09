@@ -64,7 +64,7 @@ When you define a component, a common pattern is for an event handler to be a fu
 function Toggle() {
   const [isToggleOn, setIsToggleOn] = useState(true);
 
-  handleClick() {
+  function handleClick() {
     setIsToggleOn(!isToggleOn)
   }
 
@@ -81,7 +81,7 @@ ReactDOM.render(
 );
 ```
 
-<!-- TODO: NEW CODEPEN [**Try it on CodePen**](https://codepen.io/gaearon/pen/xEmzGg?editors=0010) -->
+[**Try it on CodePen**](https://codepen.io/kickstartcoding/pen/RwWMdjx?editors=0010)
 
 ## Passing Arguments to Event Handlers {#passing-arguments-to-event-handlers}
 

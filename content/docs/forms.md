@@ -33,7 +33,7 @@ For example, if we want to make the previous example log the name when it is sub
 
 ```javascript{2,4-6,17}
 function NameForm() {
-  [value, setValue] = useState('')
+  const [value, setValue] = useState('')
 
   function handleChange(event) {
     setValue(event.target.value)
@@ -56,7 +56,7 @@ function NameForm() {
 }
 ```
 
-<!-- [**Try it on CodePen**](https://codepen.io/gaearon/pen/VmmPgp?editors=0010) -->
+[**Try it on CodePen**](https://codepen.io/kickstartcoding/pen/xxwWBzR?editors=0010)
 
 Since the `value` attribute is set on our form element, the displayed value will always be `value`, making the React state the source of truth. Since `handleChange` runs on every keystroke to update the React state, the displayed value will update as the user types.
 
@@ -76,7 +76,7 @@ In React, a `<textarea>` uses a `value` attribute instead. This way, a form usin
 
 ```javascript{2,4-6,17}
 function EssayForm() {
-    [value, setValue] = useState('Please write an essay about your favorite DOM element.')
+    const [value, setValue] = useState('Please write an essay about your favorite DOM element.')
 
   function handleChange(event) {
     setValue(event.target.value)
@@ -118,7 +118,7 @@ Note that the Coconut option is initially selected, because of the `selected` at
 
 ```javascript{2,4-6,17}
 function FlavorForm() {
-  [value, setValue] = useState('coconut')
+  const [value, setValue] = useState('coconut')
 
   function handleChange(event) {
     setValue(event.target.value)
@@ -146,7 +146,7 @@ function FlavorForm() {
 }
 ```
 
-<!-- [**Try it on CodePen**](https://codepen.io/gaearon/pen/JbbEzX?editors=0010) -->
+[**Try it on CodePen**](https://codepen.io/kickstartcoding/pen/OJyvqEo?editors=0010)
 
 Overall, this makes it so that `<input type="text">`, `<textarea>`, and `<select>` all work very similarly - they all accept a `value` attribute that you can use to implement a controlled component.
 
@@ -176,8 +176,8 @@ For example:
 
 ```javascript{7,10,11,20,29}
 function Reservation() {
-  [isGoing, setIsGoing] = useState(true)
-  [numberOfGuests, setNumberOfGuests] = useState(2)
+  const [isGoing, setIsGoing] = useState(true)
+  const [numberOfGuests, setNumberOfGuests] = useState(2)
 
   function handleInputChange(event) {
     const target = event.target
@@ -212,7 +212,7 @@ function Reservation() {
 }
 ```
 
-<!-- [**Try it on CodePen**](https://codepen.io/gaearon/pen/wgedvV?editors=0010) -->
+[**Try it on CodePen**](https://codepen.io/kickstartcoding/pen/pojLYOz?editors=0010)
 
 ## Controlled Input Null Value {#controlled-input-null-value}
 

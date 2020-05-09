@@ -166,7 +166,7 @@ ReactDOM.render(
 )
 ```
 
-<!-- TODO: NEW CODEPEN [**Try it on CodePen**](https://codepen.io/gaearon/pen/KgQpJd?editors=0010) -->
+[**Try it on CodePen**](https://codepen.io/kickstartcoding/pen/eYpMXym?editors=0010)
 
 Now we've got a React component with a `date` variable, and a `setDate` function for changing that variable. But when and how do we change it?
 
@@ -258,7 +258,7 @@ function Clock(props) {
       1000
     )
     
-    return clearInterval(timerID)
+    return () => clearInterval(timerID)
   })
 
   return (
@@ -296,10 +296,10 @@ function Clock(props) {
       1000
     )
     
-    return clearInterval(timerID)
+    return () => clearInterval(timerID)
   })
 
-  tick() {
+  function tick() {
     setDate(new Date())
   }
 
@@ -317,7 +317,7 @@ ReactDOM.render(
 )
 ```
 
-<!-- [**Try it on CodePen**](https://codepen.io/gaearon/pen/amqdNA?editors=0010) -->
+[**Try it on CodePen**](https://codepen.io/kickstartcoding/pen/mdexopX?editors=0010)
 
 Now the clock ticks every second.
 
@@ -392,7 +392,7 @@ function FormattedDate(props) {
 }
 ```
 
-<!-- [**Try it on CodePen**](https://codepen.io/gaearon/pen/zKRqNB?editors=0010) -->
+[**Try it on CodePen**](https://codepen.io/kickstartcoding/pen/PoPRLRB?editors=0010)
 
 This is commonly called a "top-down" or "unidirectional" data flow. Any state is always owned by some specific component, and any data or UI derived from that state can only affect components "below" them in the tree.
 

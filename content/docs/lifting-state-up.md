@@ -30,7 +30,7 @@ Additionally, it renders the `BoilingVerdict` for the current input value.
 
 ```js{2,5,11-15}
 function Calculator() {
-  [temperature, setTemperature] = useState('')
+  const [temperature, setTemperature] = useState('')
   
   function handleChange(e) {
     setTemperature(e.target.value)
@@ -49,7 +49,7 @@ function Calculator() {
 }
 ```
 
-<!-- [**Try it on CodePen**](https://codepen.io/gaearon/pen/ZXeOBm?editors=0010) -->
+[**Try it on CodePen**](https://codepen.io/kickstartcoding/pen/GRpxeXG?editors=0010)
 
 ## Adding a Second Input {#adding-a-second-input}
 
@@ -64,7 +64,7 @@ const scaleNames = {
 };
 
 function TemperatureInput(props) {
-  [temperature, setTemperature] = useState('')
+  const [temperature, setTemperature] = useState('')
 
   function handleChange(e) {
     setTemperature(e.target.value)
@@ -93,7 +93,7 @@ function Calculator() {
 }
 ```
 
-<!-- [**Try it on CodePen**](https://codepen.io/gaearon/pen/jGBryx?editors=0010) -->
+[**Try it on CodePen**](https://codepen.io/kickstartcoding/pen/LYpdagL)
 
 We have two inputs now, but when you enter the temperature in one of them, the other doesn't update. This contradicts our requirement: we want to keep them in sync.
 
@@ -137,7 +137,7 @@ Currently, both `TemperatureInput` components independently keep their values in
 
 ```js{2,5}
 function TemperatureInput(props) {
-  [temperature, setTemperature] = useState('')
+  const [temperature, setTemperature] = useState('')
 
   function handleChange(e) {
     setTemperature(e.target.value)
@@ -227,8 +227,8 @@ The inputs stay in sync because their values are computed from the same state:
 
 ```js{2-3,6-7,11-12,15-16,22-23,26-27,29}
 function Calculator() {
-  [temperature, setTemperature] = useState('')
-  [scale, setScale] = useState('c')
+  const [temperature, setTemperature] = useState('')
+  const [scale, setScale] = useState('c')
 
   function handleCelsiusChange(temperature) {
     setScale('c')
@@ -260,7 +260,7 @@ function Calculator() {
 }
 ```
 
-<!-- [**Try it on CodePen**](https://codepen.io/gaearon/pen/WZpxpz?editors=0010) -->
+[**Try it on CodePen**](https://codepen.io/kickstartcoding/pen/jObzJej?editors=0010)
 
 Now, no matter which input you edit, `temperature` and `scale` in the `Calculator` get updated. One of the inputs gets the value as is, so any user input is preserved, and the other input value is always recalculated based on it.
 
