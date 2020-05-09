@@ -61,7 +61,7 @@ const Header = ({location}: {location: Location}) => (
             },
 
             [media.greaterThan('small')]: {
-              width: 'calc(100% / 5.75)',
+              width: 'calc(100% / 3.5)',
             },
             [media.lessThan('small')]: {
               flex: '0 0 auto',
@@ -136,7 +136,7 @@ const Header = ({location}: {location: Location}) => (
           ))}
         </nav>
 
-        <DocSearch />
+        {/* <DocSearch /> */}
 
         <div
           css={{
