@@ -176,7 +176,7 @@ function Chosen(props) {
   function handleChange(e) {
     props.onChange(e.target.value);
   }
-  
+
   return (
     <div>
       <select className="Chosen-select" ref={setEl}>
@@ -290,7 +290,7 @@ While it is generally recommended to use unidirectional data flow such as [React
 
 The simplest way to consume [Backbone](https://backbonejs.org/) models and collections from a React component is to listen to the various change events and manually force an update.
 
-Components responsible for rendering models would listen to `'change'` events, while components responsible for rendering collections would listen for `'add'` and `'remove'` events. In both cases, call [`this.forceUpdate()`](/docs/react-component.html#forceupdate) to rerender the component with the new data.
+Components responsible for rendering models would listen to `'change'` events, while components responsible for rendering collections would listen for `'add'` and `'remove'` events. In both cases, [you can write a custom forceUpdate function](/docs/hooks-faq.html#is-there-something-like-forceupdate) to rerender the component with the new data.
 
 In the example below, the `List` component renders a Backbone collection, using the `Item` component to render individual items.
 
@@ -330,9 +330,9 @@ function List(props) {
 }
 ```
 
-<!-- [**Try it on CodePen**](https://codepen.io/gaearon/pen/GmrREm?editors=0010) -->
+[**Try it on CodePen**](https://codepen.io/kickstartcoding/pen/yLYjMrb?editors=0011)
 
-### Extracting Data from Backbone Models {#extracting-data-from-backbone-models}
+<!-- ### Extracting Data from Backbone Models {#extracting-data-from-backbone-models}
 
 The approach above requires your React components to be aware of the Backbone models and collections. If you later plan to migrate to another data management solution, you might want to concentrate the knowledge about Backbone in as few parts of the code as possible.
 
@@ -419,4 +419,4 @@ ReactDOM.render(
 
 [**Try it on CodePen**](https://codepen.io/gaearon/pen/PmWwwa?editors=0010)
 
-This technique is not limited to Backbone. You can use React with any model library by subscribing to its changes in the lifecycle methods and, optionally, copying the data into the local React state.
+This technique is not limited to Backbone. You can use React with any model library by subscribing to its changes in the lifecycle methods and, optionally, copying the data into the local React state. -->
