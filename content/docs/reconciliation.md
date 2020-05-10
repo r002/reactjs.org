@@ -8,7 +8,7 @@ React provides a declarative API so that you don't have to worry about exactly w
 
 ## Motivation {#motivation}
 
-When you use React, at a single point in time you can think of the `render()` function as creating a tree of React elements. On the next state or props update, that `render()` function will return a different tree of React elements. React then needs to figure out how to efficiently update the UI to match the most recent tree.
+When you use React, at a single point in time you can think of the return value of a component function as creating a tree of React elements. On the next state or props update, that function will return a different tree of React elements. React then needs to figure out how to efficiently update the UI to match the most recent tree.
 
 There are some generic solutions to this algorithmic problem of generating the minimum number of operations to transform one tree into another. However, the [state of the art algorithms](https://grfia.dlsi.ua.es/ml/algorithms/references/editsurvey_bille.pdf) have a complexity in the order of O(n<sup>3</sup>) where n is the number of elements in the tree.
 
@@ -27,7 +27,7 @@ When diffing two trees, React first compares the two root elements. The behavior
 
 Whenever the root elements have different types, React will tear down the old tree and build the new tree from scratch. Going from `<a>` to `<img>`, or from `<Article>` to `<Comment>`, or from `<Button>` to `<div>` - any of those will lead to a full rebuild.
 
-When tearing down a tree, old DOM nodes are destroyed. Component instances receive `componentWillUnmount()`. When building up a new tree, new DOM nodes are inserted into the DOM. Component instances receive `componentWillMount()` and then `componentDidMount()`. Any state associated with the old tree is lost.
+When tearing down a tree, old DOM nodes are destroyed. Functions returned from `useEffect` get called. When building up a new tree, new DOM nodes are inserted into the DOM. Functions passed to `useEffect` get called. Any state associated with the old tree is lost.
 
 Any components below the root will also get unmounted and have their state destroyed. For example, when diffing:
 
@@ -69,9 +69,9 @@ After handling the DOM node, React then recurses on the children.
 
 ### Component Elements Of The Same Type {#component-elements-of-the-same-type}
 
-When a component updates, the instance stays the same, so that state is maintained across renders. React updates the props of the underlying component instance to match the new element, and calls `componentWillReceiveProps()` and `componentWillUpdate()` on the underlying instance.
+When a component updates, the instance stays the same, so that state is maintained across renders. React updates the props of the underlying component instance to match the new element, and calls functions passed to `useEffect` on the underlying instance (unless an array was passed as a second argument to `useEffect` and all of its contents remain unchanged).
 
-Next, the `render()` method is called and the diff algorithm recurses on the previous result and the new result.
+Next, the component function is called and the diff algorithm recurses on the previous result and the new result.
 
 ### Recursing On Children {#recursing-on-children}
 
@@ -146,7 +146,7 @@ Here is [an example of the issues that can be caused by using indexes as keys](c
 
 ## Tradeoffs {#tradeoffs}
 
-It is important to remember that the reconciliation algorithm is an implementation detail. React could rerender the whole app on every action; the end result would be the same. Just to be clear, rerender in this context means calling `render` for all components, it doesn't mean React will unmount and remount them. It will only apply the differences following the rules stated in the previous sections.
+It is important to remember that the reconciliation algorithm is an implementation detail. React could rerender the whole app on every action; the end result would be the same. Just to be clear, rerender in this context means calling all component functions, it doesn't mean React will unmount and remount them. It will only apply the differences following the rules stated in the previous sections.
 
 We are regularly refining the heuristics in order to make common use cases faster. In the current implementation, you can express the fact that a subtree has been moved amongst its siblings, but you cannot tell that it has moved somewhere else. The algorithm will rerender that full subtree.
 
