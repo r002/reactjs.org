@@ -16,9 +16,6 @@ As such, for now the sidebar link to [the error boundaries page](content/docs/er
 
 As such, for now the sidebar link to [the higher order components page](content/docs/higher-order-components.md) has been removed.
 
-### Unsure about the best way to get a reference to the current component's el
-
-In [the integrating with other libraries doc](/content/docs/integrating-with-other-libraries.md), this is done via a class component. Not what the best practice is for a functional component.
 ### Unsure how to adapt examples in the "extracting data from backbone models" section
 
 [This section](/content/docs/integrating-with-other-libraries.md#extracting-data-from-backbone-models) is pretty complex.
