@@ -22,7 +22,7 @@ We will attach a [ref](/docs/refs-and-the-dom.html) to the root DOM element. Ins
 
 To prevent React from touching the DOM after mounting, the component will render an empty `<div />`. The `<div />` element has no properties or children, so React has no reason to update it, leaving the jQuery plugin free to manage that part of the DOM:
 
-```js{2,6,8,12}
+```js{2,6,8,11}
 function SomePlugin() {
   const [el, setEl] = useState(null)
 
@@ -37,7 +37,7 @@ function SomePlugin() {
 }
 ```
 
-Note that we give `useEffect` a function **with a return**. Many jQuery plugins attach event listeners to the DOM so it's important to detach them using the `return`. If the plugin does not provide a method for cleanup, you will probably have to provide your own, remembering to remove any event listeners the plugin registered to prevent memory leaks.
+Note that we give `useEffect` a function **that also returns a function**. Many jQuery plugins attach event listeners to the DOM so it's important to detach them using the `return`. If the plugin does not provide a method for cleanup, you will probably have to provide your own, remembering to remove any event listeners the plugin registered to prevent memory leaks.
 
 ### Integrating with jQuery Chosen Plugin {#integrating-with-jquery-chosen-plugin}
 
@@ -71,7 +71,7 @@ First, we will create a component where we return `<select>` wrapped in a `<div>
 
 ```js{5,6}
 function Chosen(props) {
-  const [el, setEl] = React.useState(null)
+  const [el, setEl] = useState(null)
 
   return (
     <div>
@@ -96,7 +96,7 @@ useEffect(() => {
 }, [el])
 ```
 
-<!-- [**Try it on CodePen**](https://codepen.io/gaearon/pen/qmqeQx?editors=0010) -->
+[**Try it on CodePen**](https://codepen.io/kickstartcoding/pen/PoPepBM?editors=0010)
 
 A few things to note:
 
@@ -121,7 +121,7 @@ This is enough to get our component to render, but we also want to be notified a
 
 We won't pass `props.onChange` directly to Chosen because component's props might change over time, and that includes event handlers. Instead, we will declare a `handleChange()` function that calls `props.onChange`, and subscribe it to the jQuery `change` event:
 
-```js{5,6,10,14-16}
+```js{4,7,12-14}
 useEffect(() => {
   const $el = $(el)
   $el.chosen()
@@ -138,7 +138,7 @@ function handleChange(e) {
 }
 ```
 
-<!-- [**Try it on CodePen**](https://codepen.io/gaearon/pen/bWgbeE?editors=0010) -->
+[**Try it on CodePen**](https://codepen.io/kickstartcoding/pen/JjYvWav?editors=0010)
 
 Finally, there is one more thing left to do. In React, props can change over time. For example, the `<Chosen>` component can get different children if parent component's state changes. This means that at integration points it is important that we manually update the DOM in response to prop updates, since we no longer let React manage the DOM for us.
 
@@ -161,13 +161,21 @@ function Chosen(props) {
   useEffect(() => {
     const $el = $(el)
     $el.chosen()
+    $el.on('change', handleChange);
 
-    return () => $el.chosen('destroy')
+    return () => {
+      $el.off('change', handleChange);
+      $el.chosen('destroy')
+    }
   }, [el])
   
   useEffect(() => {
     $(el).trigger("chosen:updated")
   }, [el, props.children])
+  
+  function handleChange(e) {
+    props.onChange(e.target.value);
+  }
   
   return (
     <div>
@@ -179,7 +187,7 @@ function Chosen(props) {
 }
 ```
 
-<!-- [**Try it on CodePen**](https://codepen.io/gaearon/pen/xdgKOz?editors=0010) -->
+[**Try it on CodePen**](https://codepen.io/kickstartcoding/pen/MWaOyNe?editors=0010)
 
 ## Integrating with Other View Libraries {#integrating-with-other-view-libraries}
 
