@@ -24,6 +24,7 @@ As such, for now the sidebar link to [the higher order components page](content/
 
 * [Avoid Reconciliation (and following sections about shouldComponentUpdate)](/docs/optimizing-performance.html#avoid-reconciliation)
 * [Portals](/docs/portals.html)
+* [Profiler](/docs/profiler.html)
 
 ## Getting started
 
