@@ -59,8 +59,6 @@
       title: Portals
     - id: profiler
       title: Profiler
-    - id: react-without-es6
-      title: React Without ES6
     - id: react-without-jsx
       title: React Without JSX
     - id: reconciliation
