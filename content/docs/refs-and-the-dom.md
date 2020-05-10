@@ -37,31 +37,27 @@ Your first inclination may be to use refs to "make things happen" in your app. I
 
 ### Creating Refs {#creating-refs}
 
-Refs are created using `React.createRef()` and attached to React elements via the `ref` attribute. Refs are commonly assigned to an instance property when a component is constructed so they can be referenced throughout the component.
+Refs are created using the `useRef` hook and attached to React elements via the `ref` attribute.
 
-```javascript{4,7}
-class MyComponent extends React.Component {
-  constructor(props) {
-    super(props);
-    this.myRef = React.createRef();
-  }
-  render() {
-    return <div ref={this.myRef} />;
-  }
+```javascript{2,4}
+function MyComponent() {
+  const myRef = useRef(null);
+  
+  return <div ref={myRef} />;
 }
 ```
 
 ### Accessing Refs {#accessing-refs}
 
-When a ref is passed to an element in `render`, a reference to the node becomes accessible at the `current` attribute of the ref.
+When a ref is passed to an element, a reference to the node becomes accessible at the `current` attribute of the ref.
 
 ```javascript
-const node = this.myRef.current;
+const node = myRef.current;
 ```
 
 The value of the ref differs depending on the type of the node:
 
-- When the `ref` attribute is used on an HTML element, the `ref` created in the constructor with `React.createRef()` receives the underlying DOM element as its `current` property.
+- When the `ref` attribute is used on an HTML element, the `ref` created with `useRef` receives the underlying DOM element as its `current` property.
 - When the `ref` attribute is used on a custom class component, the `ref` object receives the mounted instance of the component as its `current`.
 - **You may not use the `ref` attribute on function components** because they don't have instances.
 
