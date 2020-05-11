@@ -36,12 +36,12 @@ function NameForm() {
   const [value, setValue] = useState('');
 
   function handleChange(event) {
-    setValue(event.target.value)
+    setValue(event.target.value);
   }
 
   function handleSubmit(event) {
-    alert('A name was submitted: ' + value)
-    event.preventDefault()
+    alert('A name was submitted: ' + value);
+    event.preventDefault();
   }
 
   return (
@@ -52,7 +52,7 @@ function NameForm() {
       </label>
       <input type="submit" value="Submit" />
     </form>
-  )
+  );
 }
 ```
 
@@ -79,12 +79,12 @@ function EssayForm() {
     const [value, setValue] = useState('Please write an essay about your favorite DOM element.');
 
   function handleChange(event) {
-    setValue(event.target.value)
+    setValue(event.target.value);
   }
 
   function handleSubmit(event) {
-    alert('An essay was submitted: ' + value)
-    event.preventDefault()
+    alert('An essay was submitted: ' + value);
+    event.preventDefault();
   }
 
   return (
@@ -95,7 +95,7 @@ function EssayForm() {
       </label>
       <input type="submit" value="Submit" />
     </form>
-  )
+  );
 }
 ```
 
@@ -121,12 +121,12 @@ function FlavorForm() {
   const [value, setValue] = useState('coconut');
 
   function handleChange(event) {
-    setValue(event.target.value)
+    setValue(event.target.value);
   }
 
   function handleSubmit(event) {
-    alert('Your favorite flavor is: ' + value)
-    event.preventDefault()
+    alert('Your favorite flavor is: ' + value);
+    event.preventDefault();
   }
 
   return (
@@ -142,7 +142,7 @@ function FlavorForm() {
       </label>
       <input type="submit" value="Submit" />
     </form>
-  )
+  );
 }
 ```
 
@@ -180,9 +180,9 @@ function Reservation() {
   const [numberOfGuests, setNumberOfGuests] = useState(2);
 
   function handleInputChange(event) {
-    const target = event.target
-    const name = target.name
-    const value = name === 'isGoing' ? target.checked : target.value
+    const target = event.target;
+    const name = target.name;
+    const value = name === 'isGoing' ? target.checked : target.value;
 
     if (name === 'isGoing') { setIsGoing(value) } 
     if (name === 'numberOfGuests') { setNumberOfGuests(value) }
@@ -208,7 +208,7 @@ function Reservation() {
           onChange={handleInputChange} />
       </label>
     </form>
-  )
+  );
 }
 ```
 
