@@ -33,7 +33,7 @@ function Calculator() {
   const [temperature, setTemperature] = useState('');
   
   function handleChange(e) {
-    setTemperature(e.target.value)
+    setTemperature(e.target.value);
   }
 
   return (
@@ -45,7 +45,7 @@ function Calculator() {
       <BoilingVerdict
         celsius={parseFloat(temperature)} />
     </fieldset>
-  )
+  );
 }
 ```
 
@@ -67,7 +67,7 @@ function TemperatureInput(props) {
   const [temperature, setTemperature] = useState('');
 
   function handleChange(e) {
-    setTemperature(e.target.value)
+    setTemperature(e.target.value);
   }
 
   return (
@@ -76,7 +76,7 @@ function TemperatureInput(props) {
       <input value={temperature}
               onChange={handleChange} />
     </fieldset>
-  )
+  );
 }
 ```
 
@@ -89,7 +89,7 @@ function Calculator() {
       <TemperatureInput scale="c" />
       <TemperatureInput scale="f" />
     </div>
-  )
+  );
 }
 ```
 
@@ -140,7 +140,7 @@ function TemperatureInput(props) {
   const [temperature, setTemperature] = useState('');
 
   function handleChange(e) {
-    setTemperature(e.target.value)
+    setTemperature(e.target.value);
   }
 
   // ...  
@@ -172,7 +172,7 @@ Now, when the `TemperatureInput` wants to update its temperature, it calls `prop
 ```js{3}
   function handleChange(e) {
     // Before: setTemperature(e.target.value)
-    props.onTemperatureChange(e.target.value)
+    props.onTemperatureChange(e.target.value);
     // ...
 ```
 
@@ -195,7 +195,7 @@ function TemperatureInput(props) {
       <legend>Enter temperature in {scaleNames[props.scale]}:</legend>
       <input value={props.temperature} onChange={handleChange} />
     </fieldset>
-  )
+  );
 }
 ```
 
@@ -231,17 +231,17 @@ function Calculator() {
   const [scale, setScale] = useState('c');
 
   function handleCelsiusChange(temperature) {
-    setScale('c')
-    setTemperature(temperature)
+    setScale('c');
+    setTemperature(temperature);
   }
 
   function handleFahrenheitChange(temperature) {
-    setScale('f')
-    setTemperature(temperature)
+    setScale('f');
+    setTemperature(temperature);
   }
 
-  const celsius = scale === 'f' ? tryConvert(temperature, toCelsius) : temperature
-  const fahrenheit = scale === 'c' ? tryConvert(temperature, toFahrenheit) : temperature
+  const celsius = scale === 'f' ? tryConvert(temperature, toCelsius) : temperature;
+  const fahrenheit = scale === 'c' ? tryConvert(temperature, toFahrenheit) : temperature;
 
   return (
     <div>
@@ -256,7 +256,7 @@ function Calculator() {
       <BoilingVerdict
         celsius={parseFloat(celsius)} />
     </div>
-  )
+  );
 }
 ```
 
