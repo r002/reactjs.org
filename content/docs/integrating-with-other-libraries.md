@@ -27,13 +27,13 @@ function SomePlugin() {
   const [el, setEl] = useState(null);
 
   useEffect(() => {
-    const $el = $(el)
-    $el.somePlugin()
+    const $el = $(el);
+    $el.somePlugin();
 
-    return () => $el.somePlugin('destroy')
-  }, [el])
+    return () => $el.somePlugin('destroy');
+  }, [el]);
 
-  return <div ref={setEl} />
+  return <div ref={setEl} />;
 }
 ```
 
@@ -79,7 +79,7 @@ function Chosen(props) {
         {props.children}
       </select>
     </div>
-  )
+  );
 }
 ```
 
@@ -89,11 +89,11 @@ Next, we will add `useEffect`. We need to initialize Chosen with the ref to the 
 
 ```js{2,3,5}
 useEffect(() => {
-  $el = $(el)
-  $el.chosen()
+  const $el = $(el);
+  $el.chosen();
 
-  return () => $el.chosen('destroy')
-}, [el])
+  return () => $el.chosen('destroy');
+}, [el]);
 ```
 
 [**Try it on CodePen**](https://codepen.io/kickstartcoding/pen/PoPepBM?editors=0010)
@@ -110,11 +110,11 @@ A few things to note:
 
 ```js{6}
 useEffect(() => {
-  $el = $(el)
-  $el.chosen()
+  $el = $(el);
+  $el.chosen();
 
-  return () => $el.chosen('destroy')
-}, [el])
+  return () => $el.chosen('destroy');
+}, [el]);
 ```
 
 This is enough to get our component to render, but we also want to be notified about the value changes. To do this, we will subscribe to the jQuery `change` event on the `<select>` managed by Chosen.
@@ -123,15 +123,15 @@ We won't pass `props.onChange` directly to Chosen because component's props migh
 
 ```js{4,7,12-14}
 useEffect(() => {
-  const $el = $(el)
-  $el.chosen()
+  const $el = $(el);
+  $el.chosen();
   $el.on('change', handleChange);
 
   return () => {
     $el.off('change', handleChange);
-    $el.chosen('destroy')
+    $el.chosen('destroy');
   }
-}, [el])
+}, [el]);
 
 function handleChange(e) {
   props.onChange(e.target.value);
@@ -146,8 +146,8 @@ Chosen's documentation suggests that we can use jQuery `trigger()` API to notify
 
 ```js{2,3}
 useEffect(() => {
-  $(el).trigger("chosen:updated")
-}, [el, props.children])
+  $(el).trigger("chosen:updated");
+}, [el, props.children]);
 ```
 
 This way, Chosen will know to update its DOM element when the `<select>` children managed by React change.
@@ -159,19 +159,19 @@ function Chosen(props) {
   const [el, setEl] = useState(null);
 
   useEffect(() => {
-    const $el = $(el)
-    $el.chosen()
+    const $el = $(el);
+    $el.chosen();
     $el.on('change', handleChange);
 
     return () => {
       $el.off('change', handleChange);
-      $el.chosen('destroy')
+      $el.chosen('destroy');
     }
-  }, [el])
+  }, [el]);
   
   useEffect(() => {
-    $(el).trigger("chosen:updated")
-  }, [el, props.children])
+    $(el).trigger("chosen:updated");
+  }, [el, props.children]);
   
   function handleChange(e) {
     props.onChange(e.target.value);
@@ -183,7 +183,7 @@ function Chosen(props) {
         {props.children}
       </select>
     </div>
-  )
+  );
 }
 ```
 
@@ -299,25 +299,25 @@ The `forceUpdate` function is used to make sure the component rerenders when cha
 ```js{1,2,3,6,8,11,14,15,16,19,21,27}
 function Item(props) {
   const [ignored, changeUpdateValue] = useState(0);
-  const forceUpdate = () => changeUpdateValue(cur => cur + 1)
+  const forceUpdate = () => changeUpdateValue(cur => cur + 1);
 
   useEffect(() => {
-    props.model.on('change', forceUpdate)
+    props.model.on('change', forceUpdate);
 
-    return () => props.model.off('change', forceUpdate)
+    return () => props.model.off('change', forceUpdate);
   })
 
-  return <li>{props.model.get('text')}</li>
+  return <li>{props.model.get('text')}</li>;
 }
 
 function List(props) {
   const [ignored, changeUpdateValue] = useState(0);
-  const forceUpdate = () => changeUpdateValue(cur => cur + 1)
+  const forceUpdate = () => changeUpdateValue(cur => cur + 1);
 
   useEffect(() => {
-    props.collection.on('add', 'remove', forceUpdate)
+    props.collection.on('add', 'remove', forceUpdate);
 
-    return () => props.collection.off('add', 'remove', forceUpdate)
+    return () => props.collection.off('add', 'remove', forceUpdate);
   })
 
   return (
@@ -326,7 +326,7 @@ function List(props) {
         <Item key={model.cid} model={model} />
       ))}
     </ul>
-  )
+  );
 }
 ```
 
