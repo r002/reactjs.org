@@ -80,19 +80,19 @@ function LoginControl() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   function handleLoginClick() {
-    setIsLoggedIn(true)
+    setIsLoggedIn(true);
   }
 
   function handleLogoutClick() {
-    setIsLoggedIn(false)
+    setIsLoggedIn(false);
   }
 
   let button
 
   if (isLoggedIn) {
-    button = <LogoutButton onClick={handleLogoutClick} />
+    button = <LogoutButton onClick={handleLogoutClick} />;
   } else {
-    button = <LoginButton onClick={handleLoginClick} />
+    button = <LoginButton onClick={handleLoginClick} />;
   }
 
   return (
@@ -100,7 +100,7 @@ function LoginControl() {
       <Greeting isLoggedIn={isLoggedIn} />
       {button}
     </div>
-  )
+  );
 }
 
 ReactDOM.render(
@@ -193,7 +193,7 @@ function Page() {
   const [showWarning, setShowWarning] = useState(true);
 
   function handleToggleClick() {
-    setShowWarning(!showWarning)
+    setShowWarning(!showWarning);
   }
 
   return (
@@ -203,7 +203,7 @@ function Page() {
         {showWarning ? 'Hide' : 'Show'}
       </button>
     </div>
-  )
+  );
 }
 
 ReactDOM.render(
