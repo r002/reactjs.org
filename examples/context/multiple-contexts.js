@@ -7,7 +7,7 @@ const UserContext = React.createContext({
 });
 
 function App(props) {
-  const { signedInUser, theme } = props
+  const { signedInUser, theme } = props;
 
   // App component that provides initial context values
   // highlight-range{2-3,5-6}
@@ -17,7 +17,7 @@ function App(props) {
         <Layout />
       </UserContext.Provider>
     </ThemeContext.Provider>
-  )
+  );
 }
 
 function Layout() {
@@ -32,10 +32,10 @@ function Layout() {
 // A component may consume multiple contexts
 function Content() {
   // highlight-range{1-2,5}
-  const theme = useContext(ThemeContext)
-  const user = useContext(UserContext)
+  const theme = useContext(ThemeContext);
+  const user = useContext(UserContext);
 
   return (
     <ProfilePage user={user} theme={theme} />
-  )
+  );
 }

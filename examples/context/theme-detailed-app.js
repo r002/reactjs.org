@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { ThemeContext, themes } from './theme-context';
 import ThemedButton from './themed-button';
 
@@ -19,7 +19,7 @@ function App() {
       return currentTheme === themes.dark
         ? themes.light
         : themes.dark
-    })
+    });
   }
 
   //highlight-range{1-3}
@@ -36,7 +36,7 @@ function App() {
         <ThemedButton />
       </Section>
     </Page>
-  )
+  );
 }
 
 ReactDOM.render(<App />, document.root);

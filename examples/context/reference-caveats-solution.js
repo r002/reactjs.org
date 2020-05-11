@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
 function App() {
   // highlight-range{1}
@@ -9,5 +9,5 @@ function App() {
     <Provider value={value}>
       <Toolbar />
     </Provider>
-  )
+  );
 }

@@ -4,5 +4,5 @@ function App() {
     <MyContext.Provider value={{ something: 'something' }}>
       <Toolbar />
     </MyContext.Provider>
-  )
+  );
 }

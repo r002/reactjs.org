@@ -4,8 +4,8 @@ function ThemeTogglerButton() {
   // highlight-range{1-2,4}
   // The Theme Toggler Button receives not only the theme
   // but also a toggleTheme function from contexts
-  const theme = useContext(ThemeContext)
-  const toggleTheme = useContext(ToggleThemeContext)
+  const theme = useContext(ThemeContext);
+  const toggleTheme = useContext(ToggleThemeContext);
 
   return (
     <button
@@ -13,7 +13,7 @@ function ThemeTogglerButton() {
       style={{ backgroundColor: theme.background }}>
       Toggle Theme
     </button>
-  )
+  );
 }
 
 export default ThemeTogglerButton;

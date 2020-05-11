@@ -1,5 +1,5 @@
 function App() {
-  return <Toolbar theme="dark" />
+  return <Toolbar theme="dark" />;
 }
 
 function Toolbar(props) {
@@ -12,11 +12,9 @@ function Toolbar(props) {
     <div>
       <ThemedButton theme={props.theme} />
     </div>
-  )
+  );
 }
 
 function ThemedButton(props) {
-  render() {
-    return <Button theme={props.theme} />
-  }
+  return <Button theme={props.theme} />;
 }

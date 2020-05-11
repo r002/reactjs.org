@@ -9,13 +9,13 @@ function App() {
       return currentTheme === themes.dark
         ? themes.light
         : themes.dark
-    })
+    });
   }
 
   // highlight-range{1-3}
   // State also contains the updater function so it will
   // be passed down into the context provider
-  statelyToggleTheme = useState(toggleTheme)[0]
+  statelyToggleTheme = useState(toggleTheme)[0];
 
   // highlight-range{1-3,6}
   // The toggleTheme function is provided via
@@ -27,7 +27,7 @@ function App() {
         <Content />
       </ToggleThemeContext.Provider >
     </ThemeContext.Provider >
-  )
+  );
 }
 
 function Content() {

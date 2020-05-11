@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext } from 'react';
 // highlight-range{1-4}
 // Context lets us pass a value deep into the component tree
 // without explicitly threading it through every component.
@@ -14,7 +14,7 @@ function App() {
     <ThemeContext.Provider value="dark">
       <Toolbar />
     </ThemeContext.Provider>
-  )
+  );
 }
 
 // highlight-range{1,2}
@@ -33,7 +33,7 @@ function ThemedButton() {
   // Assign a contextType to read the current theme context.
   // React will find the closest theme Provider above and use its value.
   // In this example, the current theme is "dark".
-  const theme = useContext(ThemeContext)
+  const theme = useContext(ThemeContext);
 
-  return <Button theme={theme} />
+  return <Button theme={theme} />;
 }
