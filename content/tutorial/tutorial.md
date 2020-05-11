@@ -141,7 +141,7 @@ function ShoppingList(props) {
         <li>Oculus</li>
       </ul>
     </div>
-  )
+  );
 }
 
 // Example usage: <ShoppingList name="Mark" />
@@ -438,9 +438,9 @@ function Board() {
   const [squares, setSquares] = useState(Array(9).fill(null));
 
   function handleClick(i) {
-    const newSquares = squares.slice()
-    newSquares[i] = 'X'
-    setSquares(newSquares)
+    const newSquares = squares.slice();
+    newSquares[i] = 'X';
+    setSquares(newSquares);
   }
 
   function renderSquare(i) {
@@ -449,7 +449,7 @@ function Board() {
         value={squares[i]}
         onClick={() => handleClick(i)}
       />
-    )
+    );
   }
 
   const status = 'Next player: X';
@@ -545,8 +545,8 @@ Each time a player moves, `xIsNext` (a boolean) will be flipped to determine whi
   function handleClick(i) {
     const newSquares = squares.slice();
     newSquares[i] = xIsNext ? 'X' : 'O';
-    setSquares(newSquares)
-    setXIsNext(!xIsNext)
+    setSquares(newSquares);
+    setXIsNext(!xIsNext);
   }
 ```
 
@@ -571,8 +571,8 @@ function Board() {
   function handleClick(i) {
     const newSquares = squares.slice();
     newSquares[i] = xIsNext ? 'X' : 'O';
-    setSquares(newSquares)
-    setXIsNext(!xIsNext)
+    setSquares(newSquares);
+    setXIsNext(!xIsNext);
   }
 
   function renderSquare(i) {
@@ -581,7 +581,7 @@ function Board() {
         value={squares[i]}
         onClick={() => handleClick(i)}
       />
-    )
+    );
   }
 
   const status = 'Next player: ' + (xIsNext ? 'X' : 'O');
@@ -663,8 +663,8 @@ We can now change the Board's `handleClick` function to return early by ignoring
     }
     const newSquares = squares.slice();
     newSquares[i] = xIsNext ? 'X' : 'O';
-    setSquares(newSquares)
-    setXIsNext(!xIsNext)
+    setSquares(newSquares);
+    setXIsNext(!xIsNext);
   }
 ```
 
@@ -759,8 +759,8 @@ function Board(props) {
     }
     const newSquares = squares.slice();
     newSquares[i] = xIsNext ? 'X' : 'O';
-    setSquares(newSquares)
-    setXIsNext(!xIsNext)
+    setSquares(newSquares);
+    setXIsNext(!xIsNext);
   }
 
   function renderSquare(i) {
@@ -769,7 +769,7 @@ function Board(props) {
         value={props.squares[i]}
         onClick={() => props.onClick(i)}
       />
-    )
+    );
   }
 
   const status = 'Next player: ' + (xIsNext ? 'X' : 'O');
@@ -866,8 +866,8 @@ Finally, we need to move the `handleClick` function from the Board component to 
     }
     squares[i] = xIsNext ? 'X' : 'O';
 
-    setHistory(history.concat([{ squares: squares }]))
-    setXIsNext(!xIsNext)
+    setHistory(history.concat([{ squares: squares }]));
+    setXIsNext(!xIsNext);
   }
 ```
 
@@ -1019,8 +1019,8 @@ Next, we'll define the `jumpTo` function in Game to update that `stepNumber`. We
   }
 
   function jumpTo(step) {
-    setStepNumber(step)
-    setXIsNext((step % 2) === 0)
+    setStepNumber(step);
+    setXIsNext((step % 2) === 0);
   }
 ```
 
@@ -1032,25 +1032,25 @@ We will also replace reading `history` with `history.slice(0, stepNumber + 1)`. 
 
 ```javascript{2,11}
   function handleClick(i) {
-    const currentHistory = history.slice(0, stepNumber + 1)
-    const currentStep = currentHistory[currentHistory.length - 1]
-    const squares = currentStep.squares.slice()
+    const currentHistory = history.slice(0, stepNumber + 1);
+    const currentStep = currentHistory[currentHistory.length - 1];
+    const squares = currentStep.squares.slice();
     if (calculateWinner(squares) || squares[i]) {
-      return
+      return;
     }
-    squares[i] = xIsNext ? "X" : "O"
+    squares[i] = xIsNext ? "X" : "O";
 
-    setHistory(currentHistory.concat([{ squares: squares }]))
-    setStepNumber(currentHistory.length)
-    setXIsNext(!xIsNext)
+    setHistory(currentHistory.concat([{ squares: squares }]));
+    setStepNumber(currentHistory.length);
+    setXIsNext(!xIsNext);
   }
 ```
 
 Finally, we will modify the Game component from always rendering the last move to rendering the currently selected move according to `stepNumber`:
 
 ```javascript{1}
-  const current = history[stepNumber]
-  const winner = calculateWinner(current.squares)
+  const current = history[stepNumber];
+  const winner = calculateWinner(current.squares);
 
     // the rest has not changed
 ```
