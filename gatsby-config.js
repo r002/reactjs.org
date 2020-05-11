@@ -65,6 +65,7 @@ module.exports = {
               externals: [
                 `//unpkg.com/react/umd/react.development.js`,
                 `//unpkg.com/react-dom/umd/react-dom.development.js`,
+                `//reactwithhooks.netlify.app/expose_hooks.js`,
               ],
               dependencies: [`react`, `react-dom`],
               redirectTemplate: `${__dirname}/src/templates/codepen-example.js`,
@@ -114,7 +115,7 @@ module.exports = {
         }`,
         feeds: [
           {
-            serialize: ({query: {site, allMarkdownRemark}}) => {
+            serialize: ({ query: { site, allMarkdownRemark } }) => {
               return allMarkdownRemark.edges.map(edge => {
                 return Object.assign(
                   {},
