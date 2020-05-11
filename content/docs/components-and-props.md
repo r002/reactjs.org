@@ -44,7 +44,7 @@ class Welcome extends React.Component {
 
 The above two components are equivalent from React's point of view.
 
-Function and Class components both have some additional features that we will discuss in the [next sections](/docs/state-and-lifecycle.html).
+It used to be the case that there were many pieces of functionality you could only implement using ES6 class components. With the addition of [hooks](/docs/hooks-intro.html), the core functionality classes provided is available in a nicer way with function components, so this guide will be using function components from this point forward.
 
 ## Rendering a Component {#rendering-a-component}
 
