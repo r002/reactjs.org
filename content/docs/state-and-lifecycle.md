@@ -19,7 +19,7 @@ function tick() {
       <h1>Hello, world!</h1>
       <h2>It is {new Date().toLocaleTimeString()}.</h2>
     </div>
-  )
+  );
   ReactDOM.render(
     element,
     document.getElementById('root')
@@ -259,7 +259,7 @@ function Clock(props) {
     );
     
     return () => clearInterval(timerID);
-  })
+  });
 
   return (
     <div>
@@ -297,7 +297,7 @@ function Clock(props) {
     );
     
     return () => clearInterval(timerID);
-  })
+  });
 
   function tick() {
     setDate(new Date());
@@ -344,7 +344,7 @@ For example, this will not re-render a component:
 ```js
 const [comment, setComment] = useState('some comment');
 // Wrong
-comment = 'some new comment'
+comment = 'some new comment';
 ```
 
 Instead, use `setComment()`:
@@ -388,7 +388,7 @@ The `FormattedDate` component would receive the `date` in its props and wouldn't
 
 ```js
 function FormattedDate(props) {
-  return <h2>It is {props.date.toLocaleTimeString()}.</h2>
+  return <h2>It is {props.date.toLocaleTimeString()}.</h2>;
 }
 ```
 
