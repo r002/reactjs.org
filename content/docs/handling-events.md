@@ -65,7 +65,7 @@ function Toggle() {
   const [isToggleOn, setIsToggleOn] = useState(true);
 
   function handleClick() {
-    setIsToggleOn(!isToggleOn)
+    setIsToggleOn(!isToggleOn);
   }
 
   return (
