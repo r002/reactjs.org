@@ -33,7 +33,7 @@ For example, if we want to make the previous example log the name when it is sub
 
 ```javascript{2,4-6,17}
 function NameForm() {
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState('');
 
   function handleChange(event) {
     setValue(event.target.value)
@@ -76,7 +76,7 @@ In React, a `<textarea>` uses a `value` attribute instead. This way, a form usin
 
 ```javascript{2,4-6,17}
 function EssayForm() {
-    const [value, setValue] = useState('Please write an essay about your favorite DOM element.')
+    const [value, setValue] = useState('Please write an essay about your favorite DOM element.');
 
   function handleChange(event) {
     setValue(event.target.value)
@@ -118,7 +118,7 @@ Note that the Coconut option is initially selected, because of the `selected` at
 
 ```javascript{2,4-6,17}
 function FlavorForm() {
-  const [value, setValue] = useState('coconut')
+  const [value, setValue] = useState('coconut');
 
   function handleChange(event) {
     setValue(event.target.value)
@@ -176,8 +176,8 @@ For example:
 
 ```javascript{7,10,11,20,29}
 function Reservation() {
-  const [isGoing, setIsGoing] = useState(true)
-  const [numberOfGuests, setNumberOfGuests] = useState(2)
+  const [isGoing, setIsGoing] = useState(true);
+  const [numberOfGuests, setNumberOfGuests] = useState(2);
 
   function handleInputChange(event) {
     const target = event.target

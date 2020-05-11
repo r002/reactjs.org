@@ -31,9 +31,9 @@ The example API returns a JSON object like this:
 
 ```jsx
 function MyComponent() {
-  const [error, setError] = useState(null)
-  const [isLoaded, setIsLoaded] = useState(false)
-  const [items, setItems] = useState([])
+  const [error, setError] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [items, setItems] = useState([]);
 
   useEffect(() => {
     fetch("https://api.example.com/items")

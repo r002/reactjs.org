@@ -42,7 +42,7 @@ This page answers some of the frequently asked questions about [Hooks](/docs/hoo
   * [Is there something like forceUpdate?](#is-there-something-like-forceupdate)
   * [Can I make a ref to a function component?](#can-i-make-a-ref-to-a-function-component)
   * [How can I measure a DOM node?](#how-can-i-measure-a-dom-node)
-  * [What does const [thing, setThing] = useState() mean?](#what-does-const-thing-setthing--usestate-mean)
+  * [What does const [thing, setThing] = useState() mean?](#what-does-const-thing-setthing--usestate-mean);
 * **[Performance Optimizations](#performance-optimizations)**
   * [Can I skip an effect on updates?](#can-i-skip-an-effect-on-updates)
   * [Is it safe to omit functions from the list of dependencies?](#is-it-safe-to-omit-functions-from-the-list-of-dependencies)

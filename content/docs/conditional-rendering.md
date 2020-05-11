@@ -77,7 +77,7 @@ It will render either `<LoginButton />` or `<LogoutButton />` depending on its c
 ```javascript{15-19,23,24}
 function LoginControl() {
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   function handleLoginClick() {
     setIsLoggedIn(true)
@@ -190,7 +190,7 @@ function WarningBanner(props) {
 }
 
 function Page() {
-  const [showWarning, setShowWarning] = useState(true)
+  const [showWarning, setShowWarning] = useState(true);
 
   function handleToggleClick() {
     setShowWarning(!showWarning)

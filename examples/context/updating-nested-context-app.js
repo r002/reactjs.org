@@ -2,7 +2,7 @@ import { ThemeContext, ToggleThemeContext, themes } from './theme-context';
 import ThemeTogglerButton from './theme-toggler-button';
 
 function App() {
-  const [theme, setTheme] = useState(themes.light)
+  const [theme, setTheme] = useState(themes.light);
 
   function toggleTheme() {
     setTheme(currentTheme => {

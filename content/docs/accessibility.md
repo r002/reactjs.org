@@ -240,7 +240,7 @@ This is typically implemented by attaching a `click` event to the `window` objec
 
 ```javascript{6,15-19}
 function OuterClickExample() {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
   const toggleContainer = useRef(null)
 
   useEffect(() => {
@@ -282,8 +282,8 @@ The same functionality can be achieved by using appropriate event handlers inste
 
 ```javascript{9-19,21-25,27-28,30-31}
 function BlurExample() {
-  const [isOpen, setIsOpen] = useState(false)
-  const [timeOutId, setTimeOutId] = useState(null)
+  const [isOpen, setIsOpen] = useState(false);
+  const [timeOutId, setTimeOutId] = useState(null);
 
   function onClickHandler() {
     setIsOpen(currentIsOpen => !currentIsOpen)

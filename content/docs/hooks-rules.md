@@ -90,9 +90,9 @@ useEffect(updateTitle)     // 4. Add an effect for updating the title
 // -------------
 // Second render
 // -------------
-useState('Mary')           // 1. Read the name state variable (argument is ignored)
+useState('Mary')           // 1. Read the name state variable (argument is ignored);
 useEffect(persistForm)     // 2. Replace the effect for persisting the form
-useState('Poppins')        // 3. Read the surname state variable (argument is ignored)
+useState('Poppins')        // 3. Read the surname state variable (argument is ignored);
 useEffect(updateTitle)     // 4. Replace the effect for updating the title
 
 // ...
@@ -112,7 +112,7 @@ As long as the order of the Hook calls is the same between renders, React can as
 The `name !== ''` condition is `true` on the first render, so we run this Hook. However, on the next render the user might clear the form, making the condition `false`. Now that we skip this Hook during rendering, the order of the Hook calls becomes different:
 
 ```js
-useState('Mary')           // 1. Read the name state variable (argument is ignored)
+useState('Mary')           // 1. Read the name state variable (argument is ignored);
 // useEffect(persistForm)  // 🔴 This Hook was skipped!
 useState('Poppins')        // 🔴 2 (but was 3). Fail to read the surname state variable
 useEffect(updateTitle)     // 🔴 3 (but was 4). Fail to replace the effect

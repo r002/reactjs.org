@@ -24,7 +24,7 @@ To prevent React from touching the DOM after mounting, the component will render
 
 ```js{2,6,8,11}
 function SomePlugin() {
-  const [el, setEl] = useState(null)
+  const [el, setEl] = useState(null);
 
   useEffect(() => {
     const $el = $(el)
@@ -71,7 +71,7 @@ First, we will create a component where we return `<select>` wrapped in a `<div>
 
 ```js{5,6}
 function Chosen(props) {
-  const [el, setEl] = useState(null)
+  const [el, setEl] = useState(null);
 
   return (
     <div>
@@ -156,7 +156,7 @@ The complete implementation of the `Chosen` component looks like this:
 
 ```js
 function Chosen(props) {
-  const [el, setEl] = useState(null)
+  const [el, setEl] = useState(null);
 
   useEffect(() => {
     const $el = $(el)
@@ -311,7 +311,7 @@ function Item(props) {
 }
 
 function List(props) {
-  const [ignored, changeUpdateValue] = useState(0)
+  const [ignored, changeUpdateValue] = useState(0);
   const forceUpdate = () => changeUpdateValue(cur => cur + 1)
 
   useEffect(() => {

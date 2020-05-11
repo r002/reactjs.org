@@ -109,7 +109,7 @@ function Clock(props) {
 The line calling `useState` will look like this:
 
 ```js
-const [date, setDate] = useState(new Date())
+const [date, setDate] = useState(new Date());
 ```
 
 Passing `new Date()` to `useState` sets the initial value to `new Date()`. `const [date, setDate] = useState(new Date())` stores the current value in `date`, and puts the function that will let us update that value in `setDate`.
@@ -122,7 +122,7 @@ With that explanation out of the way, we're ready for step 3:
 import React, { useState } from 'react'
 
 function Clock(props) {
-  const [date, setDate] = useState(new Date())
+  const [date, setDate] = useState(new Date());
 
   return (
     <div>
@@ -150,7 +150,7 @@ The result looks like this:
 import React, { useState } from 'react'
 
 function Clock(props) {
-  const [date, setDate] = useState(new Date())
+  const [date, setDate] = useState(new Date());
 
   return (
     <div>
@@ -233,7 +233,7 @@ First, we need to import the `useEffect` function:
 import React, { useState, useEffect } from 'react'
 
 function Clock(props) {
-  const [date, setDate] = useState(new Date())
+  const [date, setDate] = useState(new Date());
 
   return (
     <div>
@@ -250,7 +250,7 @@ Second, we need to add the `useEffect` code:
 import React, { useState, useEffect } from 'react'
 
 function Clock(props) {
-  const [date, setDate] = useState(new Date())
+  const [date, setDate] = useState(new Date());
 
   useEffect(() => {
     const timerID = setInterval(
@@ -288,7 +288,7 @@ Let's add it to our component:
 import React, { useState, useEffect } from 'react'
 
 function Clock(props) {
-  const [date, setDate] = useState(new Date())
+  const [date, setDate] = useState(new Date());
 
   useEffect(() => {
     const timerID = setInterval(
@@ -342,7 +342,7 @@ There are three things you should know about `useState()`.
 For example, this will not re-render a component:
 
 ```js
-const [comment, setComment] = useState('some comment')
+const [comment, setComment] = useState('some comment');
 // Wrong
 comment = 'some new comment'
 ```

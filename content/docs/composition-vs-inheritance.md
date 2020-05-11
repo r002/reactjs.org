@@ -131,7 +131,7 @@ function Dialog(props) {
 }
 
 function SignUpDialog() {
-  const [login, setLogin] = useState('')
+  const [login, setLogin] = useState('');
 
   function handleChange(e) {
     setLogin(e.target.value)

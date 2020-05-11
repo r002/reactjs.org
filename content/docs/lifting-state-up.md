@@ -30,7 +30,7 @@ Additionally, it renders the `BoilingVerdict` for the current input value.
 
 ```js{2,5,11-15}
 function Calculator() {
-  const [temperature, setTemperature] = useState('')
+  const [temperature, setTemperature] = useState('');
   
   function handleChange(e) {
     setTemperature(e.target.value)
@@ -64,7 +64,7 @@ const scaleNames = {
 };
 
 function TemperatureInput(props) {
-  const [temperature, setTemperature] = useState('')
+  const [temperature, setTemperature] = useState('');
 
   function handleChange(e) {
     setTemperature(e.target.value)
@@ -137,7 +137,7 @@ Currently, both `TemperatureInput` components independently keep their values in
 
 ```js{2,5}
 function TemperatureInput(props) {
-  const [temperature, setTemperature] = useState('')
+  const [temperature, setTemperature] = useState('');
 
   function handleChange(e) {
     setTemperature(e.target.value)
@@ -227,8 +227,8 @@ The inputs stay in sync because their values are computed from the same state:
 
 ```js{2-3,6-7,11-12,15-16,22-23,26-27,29}
 function Calculator() {
-  const [temperature, setTemperature] = useState('')
-  const [scale, setScale] = useState('c')
+  const [temperature, setTemperature] = useState('');
+  const [scale, setScale] = useState('c');
 
   function handleCelsiusChange(temperature) {
     setScale('c')

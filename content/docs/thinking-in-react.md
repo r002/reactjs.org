@@ -128,8 +128,8 @@ Let's run through this strategy for our application:
 Cool, so we've decided that our state lives in `FilterableProductTable`. First, use `useState` to setup the initial state of your application:
 
 ```javascript
-const [filterText, setFilterText] = useState('')
-const [inStockOnly, setInStockOnly] = useState(false)
+const [filterText, setFilterText] = useState('');
+const [inStockOnly, setInStockOnly] = useState(false);
 ```
 
 Then, pass `filterText` and `inStockOnly` to `ProductTable` and `SearchBar` as a prop. Finally, use these props to filter the rows in `ProductTable` and set the values of the form fields in `SearchBar`.

@@ -266,7 +266,7 @@ import React, { useState } from 'react'
 
 function Square(props) {
   // `value` is the state and `setValue` is the setter function
-  const [value, setValue] = useState(null)
+  const [value, setValue] = useState(null);
 
   return (
     <button className="square" onClick={() => alert('click')}>
@@ -286,7 +286,7 @@ After these changes, the `<button>` tag that is returned by the Square component
 
 ```javascript{6-7,9}
 function Square(props) {
-  const [value, setValue] = useState(null)
+  const [value, setValue] = useState(null);
 
   return (
     <button
@@ -340,7 +340,7 @@ Add a `useState` call to the Board and set a state value called `squares` to sta
 
 ```javascript{2}
 function Board() {
-  const [squares, setSquares] = useState(Array(9).fill(null))
+  const [squares, setSquares] = useState(Array(9).fill(null));
 
   renderSquare(i) {
     return <Square value={i} />;
@@ -435,7 +435,7 @@ When we try to click a Square, we should get an error because we haven't defined
 
 ```javascript{4-8}
 function Board() {
-  const [squares, setSquares] = useState(Array(9).fill(null))
+  const [squares, setSquares] = useState(Array(9).fill(null));
 
   function handleClick(i) {
     const newSquares = squares.slice()
@@ -535,8 +535,8 @@ We'll set the first move to be "X" by default. We can set this default by adding
 
 ```javascript{3}
 function Board() {
-  const [squares, setSquares] = useState(Array(9).fill(null))
-  const [xIsNext, setXIsNext] = useState(true)
+  const [squares, setSquares] = useState(Array(9).fill(null));
+  const [xIsNext, setXIsNext] = useState(true);
 ```
 
 Each time a player moves, `xIsNext` (a boolean) will be flipped to determine which player goes next and the game's state will be saved. We'll update the Board's `handleClick` function to flip the value of `xIsNext`:
@@ -565,8 +565,8 @@ After applying these changes, you should have this Board component:
 
 ```javascript{3,6-9,21}
 function Board() {
-  const [squares, setSquares] = useState(Array(9).fill(null))
-  const [xIsNext, setXIsNext] = useState(true)
+  const [squares, setSquares] = useState(Array(9).fill(null));
+  const [xIsNext, setXIsNext] = useState(true);
 
   function handleClick(i) {
     const newSquares = squares.slice();
@@ -726,8 +726,8 @@ First, we'll set up the initial state for the Game component with `useState` cal
 
 ```javascript{2-3}
 function Game() {
-  const [history, setHistory] = useState([{ squares: Array(9).fill(null) }])
-  const [xIsNext, setXIsNext] = useState(true)
+  const [history, setHistory] = useState([{ squares: Array(9).fill(null) }]);
+  const [xIsNext, setXIsNext] = useState(true);
 
   return (
     <div className="game">
@@ -801,8 +801,8 @@ We'll update the Game component to use the most recent history entry to determin
 
 ```javascript{5-13,18-19,24}
 function Game() {
-  const [history, setHistory] = useState([{ squares: Array(9).fill(null) }])
-  const [xIsNext, setXIsNext] = useState(true)
+  const [history, setHistory] = useState([{ squares: Array(9).fill(null) }]);
+  const [xIsNext, setXIsNext] = useState(true);
 
   const current = history[history.length - 1];
   const winner = calculateWinner(current.squares);
@@ -1006,9 +1006,9 @@ First, add `stepNumber: 0` to the initial state in Game:
 
 ```js{3}
 function Game() {
-  const [history, setHistory] = useState([{ squares: Array(9).fill(null) }])
-  const [stepNumber, setStepNumber] = useState(0)
-  const [xIsNext, setXIsNext] = useState(true)
+  const [history, setHistory] = useState([{ squares: Array(9).fill(null) }]);
+  const [stepNumber, setStepNumber] = useState(0);
+  const [xIsNext, setXIsNext] = useState(true);
 ```
 
 Next, we'll define the `jumpTo` function in Game to update that `stepNumber`. We also set `xIsNext` to true if the number that we're changing `stepNumber` to is even:
