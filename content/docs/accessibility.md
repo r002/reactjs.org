@@ -172,7 +172,7 @@ Using this, we first create a ref to an element in the JSX of a component class:
 ```javascript{2-3,5-6,10}
 function CustomTextInput() {
   // Create a ref to store the textInput DOM element
-  const textInput = useRef(null)
+  const textInput = useRef(null);
 
   // Use the `ref` callback to store a reference to the text input DOM
   // element in an instance field (for example, textInput).
@@ -181,7 +181,7 @@ function CustomTextInput() {
       type="text"
       ref={textInput}
     />
-  )
+  );
 }
 ```
 
@@ -191,7 +191,7 @@ Then we can focus it elsewhere in our component when needed:
  focus() {
    // Explicitly focus the text input using the raw DOM API
    // Note: we're accessing "current" to get the DOM node
-   textInput.current.focus()
+   textInput.current.focus();
  }
  ```
 
@@ -207,15 +207,15 @@ function CustomTextInput(props) {
 }
 
 function Parent() {
-  const inputElement = useRef(null)
+  const inputElement = useRef(null);
 
   return (
     <CustomTextInput inputRef={inputElement} />
-  )
+  );
 }
 
 // Now you can set focus when required.
-inputElement.current.focus()
+inputElement.current.focus();
 ```
 
 When using a HOC to extend components, it is recommended to [forward the ref](/docs/forwarding-refs.html) to the wrapped component using the `forwardRef` function of React. If a third party HOC does not implement ref forwarding, the above pattern can still be used as a fallback.
@@ -241,21 +241,21 @@ This is typically implemented by attaching a `click` event to the `window` objec
 ```javascript{6,15-19}
 function OuterClickExample() {
   const [isOpen, setIsOpen] = useState(false);
-  const toggleContainer = useRef(null)
+  const toggleContainer = useRef(null);
 
   useEffect(() => {
     window.addEventListener('click', onClickOutsideHandler)
 
-    return () => window.removeEventListener('click', onClickOutsideHandler)
-  }, [])
+    return () => window.removeEventListener('click', onClickOutsideHandler);
+  }, []);
  
   function onClickHandler() {
-    setIsOpen(currentIsOpen => !currentIsOpen)
+    setIsOpen(currentIsOpen => !currentIsOpen);
   }
 
   function onClickOutsideHandler(event) {
     if (isOpen && !toggleContainer.current.contains(event.target)) {
-      setIsOpen(false)
+      setIsOpen(false);
     }
   }
 
@@ -270,7 +270,7 @@ function OuterClickExample() {
         </ul>
       )}
     </div>
-  )
+  );
 }
 ```
 
@@ -286,7 +286,7 @@ function BlurExample() {
   const [timeOutId, setTimeOutId] = useState(null);
 
   function onClickHandler() {
-    setIsOpen(currentIsOpen => !currentIsOpen)
+    setIsOpen(currentIsOpen => !currentIsOpen);
   }
 
   // We close the popover on the next tick by using setTimeout.
@@ -295,16 +295,16 @@ function BlurExample() {
   // the blur event fires prior to the new focus event.
   function onBlurHandler() {
     const newTimeOutId = setTimeout(() => {
-      setIsOpen(false)
-    })
+      setIsOpen(false);
+    });
 
-    setTimeOutId(newTimeOutId)
+    setTimeOutId(newTimeOutId);
   }
 
   // If a child receives focus, do not close the popover.
   function onFocusHandler() {
     clearTimeout(timeOutId)
-    setTimeOutId(null)
+    setTimeOutId(null);
   }
 
   // React assists us by bubbling the blur and
@@ -325,7 +325,7 @@ function BlurExample() {
         </ul>
       )}
     </div>
-  )
+  );
 }
 ```
 
