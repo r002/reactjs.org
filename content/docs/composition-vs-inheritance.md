@@ -134,11 +134,11 @@ function SignUpDialog() {
   const [login, setLogin] = useState('');
 
   function handleChange(e) {
-    setLogin(e.target.value)
+    setLogin(e.target.value);
   }
 
   function handleSignUp() {
-    alert(`Welcome aboard, ${login}!`)
+    alert(`Welcome aboard, ${login}!`);
   }
 
   return (
