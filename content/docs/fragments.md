@@ -7,7 +7,7 @@ permalink: docs/fragments.html
 A common pattern in React is for a component to return multiple elements. Fragments let you group a list of children without adding extra nodes to the DOM.
 
 ```js
-render() {
+function Example() {
   return (
     <React.Fragment>
       <ChildA />
@@ -32,7 +32,7 @@ function Table() {
         <Columns />
       </tr>
     </table>
-  )
+  );
 }
 ```
 
@@ -45,7 +45,7 @@ function Columns() {
       <td>Hello</td>
       <td>World</td>
     </div>
-  )
+  );
 }
 ```
 
@@ -68,14 +68,12 @@ Fragments solve this problem.
 
 ```jsx{4,7}
 function Columns() {
-  render() {
-    return (
-      <React.Fragment>
-        <td>Hello</td>
-        <td>World</td>
-      </React.Fragment>
-    );
-  }
+  return (
+    <React.Fragment>
+      <td>Hello</td>
+      <td>World</td>
+    </React.Fragment>
+  );
 }
 ```
 
@@ -96,14 +94,12 @@ There is a new, shorter syntax you can use for declaring fragments. It looks lik
 
 ```jsx{4,7}
 function Columns() {
-  render() {
-    return (
-      <>
-        <td>Hello</td>
-        <td>World</td>
-      </>
-    );
-  }
+  return (
+    <>
+      <td>Hello</td>
+      <td>World</td>
+    </>
+  );
 }
 ```
 
