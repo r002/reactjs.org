@@ -23,34 +23,29 @@ It requires two props: an `id` (string) and an `onRender` callback (function) wh
 
 For example, to profile a `Navigation` component and its descendants:
 
-```js{3}
-render(
-  <App>
-    <Profiler id="Navigation" onRender={callback}>
-      <Navigation {...props} />
-    </Profiler>
-    <Main {...props} />
-  </App>
-);
+```js{2}
+<App>
+  <Profiler id="Navigation" onRender={callback}>
+    <Navigation {...props} />
+  </Profiler>
+  <Main {...props} />
+</App>
 ```
 
 Multiple `Profiler` components can be used to measure different parts of an application:
-```js{3,6}
-render(
-  <App>
-    <Profiler id="Navigation" onRender={callback}>
-      <Navigation {...props} />
-    </Profiler>
-    <Profiler id="Main" onRender={callback}>
-      <Main {...props} />
-    </Profiler>
-  </App>
-);
+```js{2,5}
+<App>
+  <Profiler id="Navigation" onRender={callback}>
+    <Navigation {...props} />
+  </Profiler>
+  <Profiler id="Main" onRender={callback}>
+    <Main {...props} />
+  </Profiler>
+</App>
 ```
 
 `Profiler` components can also be nested to measure different components within the same subtree:
-```js{2,6,8}
-render(
+```js{2,4,7}
   <App>
     <Profiler id="Panel" onRender={callback}>
       <Panel {...props}>
@@ -63,7 +58,6 @@ render(
       </Panel>
     </Profiler>
   </App>
-);
 ```
 
 > Note
@@ -99,7 +93,7 @@ This can be used to identify which part of the tree was committed if you are usi
 Identifies whether the tree has just been mounted for the first time or re-rendered due to a change in props, state, or hooks.
 * **`actualDuration: number`** -
 Time spent rendering the `Profiler` and its descendants for the current update.
-This indicates how well the subtree makes use of memoization (e.g. [`React.memo`](/docs/react-api.html#reactmemo), [`useMemo`](/docs/hooks-reference.html#usememo), [`shouldComponentUpdate`](/docs/hooks-faq.html#how-do-i-implement-shouldcomponentupdate)).
+This indicates how well the subtree makes use of memoization (e.g. [`React.memo`](/docs/react-api.html#reactmemo), [`useMemo`](/docs/hooks-reference.html#usememo)).
 Ideally this value should decrease significantly after the initial mount as many of the descendants will only need to re-render if their specific props change.
 * **`baseDuration: number`** -
 Duration of the most recent `render` time for each individual component within the `Profiler` tree.
