@@ -22,7 +22,6 @@ As such, for now the sidebar link to [the higher order components page](content/
 
 ## Skipped sections
 
-* [CodePen examples in reconciliation](/docs/reconciliation.html)
 * [Refs and the DOM starting at "accessing refs" section](/docs/refs-and-the-dom.html)
 
 ## Getting started

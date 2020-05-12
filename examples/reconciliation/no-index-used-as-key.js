@@ -12,96 +12,79 @@ const ToDo = props => (
   </tr>
 );
 
-class ToDoList extends React.Component {
-  constructor() {
-    super();
-    const date = new Date();
-    const toDoCounter = 1;
-    this.state = {
-      list: [
-        {
-          id: toDoCounter,
-          createdAt: date,
-        },
-      ],
-      toDoCounter: toDoCounter,
-    };
-  }
+function ToDoList() {
+  const [todoCounter, setTodoCounter] = useState(1);
+  const [list, setList] = useState([
+    {
+      id: todoCounter,
+      createdAt: new Date()
+    }
+  ]);
 
-  sortByEarliest() {
-    const sortedList = this.state.list.sort((a, b) => {
+  function sortByEarliest() {
+    const sortedList = list.sort((a, b) => {
       return a.createdAt - b.createdAt;
     });
-    this.setState({
-      list: [...sortedList],
-    });
+    setList([...sortedList]);
   }
 
-  sortByLatest() {
-    const sortedList = this.state.list.sort((a, b) => {
+  function sortByLatest() {
+    const sortedList = list.sort((a, b) => {
       return b.createdAt - a.createdAt;
     });
-    this.setState({
-      list: [...sortedList],
-    });
+    setList([...sortedList]);
   }
 
-  addToEnd() {
+  function addToEnd() {
     const date = new Date();
-    const nextId = this.state.toDoCounter + 1;
+    const nextId = todoCounter + 1;
     const newList = [
-      ...this.state.list,
-      {id: nextId, createdAt: date},
+      ...list,
+      { id: nextId, createdAt: date },
     ];
-    this.setState({
-      list: newList,
-      toDoCounter: nextId,
-    });
+    setList(newList);
+    setTodoCounter(nextId);
   }
 
-  addToStart() {
+  function addToStart() {
     const date = new Date();
-    const nextId = this.state.toDoCounter + 1;
+    const nextId = todoCounter + 1;
     const newList = [
-      {id: nextId, createdAt: date},
-      ...this.state.list,
+      { id: nextId, createdAt: date },
+      ...list,
     ];
-    this.setState({
-      list: newList,
-      toDoCounter: nextId,
-    });
+    setList(newList);
+    setTodoCounter(nextId);
   }
 
-  render() {
-    return (
-      <div>
-        <code>key=id</code>
-        <br />
-        <button onClick={this.addToStart.bind(this)}>
-          Add New to Start
-        </button>
-        <button onClick={this.addToEnd.bind(this)}>
-          Add New to End
-        </button>
-        <button onClick={this.sortByEarliest.bind(this)}>
-          Sort by Earliest
-        </button>
-        <button onClick={this.sortByLatest.bind(this)}>
-          Sort by Latest
-        </button>
-        <table>
-          <tr>
-            <th>ID</th>
-            <th />
-            <th>created at</th>
-          </tr>
-          {this.state.list.map((todo, index) => (
-            <ToDo key={todo.id} {...todo} />
-          ))}
-        </table>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <code>key=id</code>
+      <br />
+      <button onClick={addToStart}>
+        Add New to Start
+      </button>
+      <button onClick={addToEnd}>
+        Add New to End
+      </button>
+      <button onClick={sortByEarliest}>
+        Sort by Earliest
+      </button>
+      <button onClick={sortByLatest}>
+        Sort by Latest
+      </button>
+      <table>
+        <tr>
+          <th>ID</th>
+          <th />
+          <th>created at</th>
+        </tr>
+        {list.map((todo, index) => (
+          <ToDo key={todo.id} {...todo} />
+        ))}
+      </table>
+    </div>
+  );
 }
 
 ReactDOM.render(
