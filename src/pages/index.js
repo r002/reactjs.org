@@ -111,7 +111,7 @@ class Home extends Component {
                         fontSize: 60,
                       },
                     }}>
-                    React
+                    React with Hooks
                   </h1>
                   <p
                     css={{
@@ -120,6 +120,8 @@ class Home extends Component {
                       fontSize: 24,
                       letterSpacing: '0.01em',
                       fontWeight: 200,
+                      maxWidth: '44ch',
+                      margin: 'auto',
 
                       [media.size('xsmall')]: {
                         fontSize: 16,
@@ -133,7 +135,8 @@ class Home extends Component {
                         fontSize: 30,
                       },
                     }}>
-                    A JavaScript library for building user interfaces
+                    An adaptation of the official ReactJS.org documentation
+                     using React Hooks-based explanations and examples.
                   </p>
                   <Flex
                     valign="center"
