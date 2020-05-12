@@ -22,6 +22,7 @@ As such, for now the sidebar link to [the higher order components page](content/
 
 ## Skipped sections
 
+* [Render Props](/docs/render-props.html)
 * [Refs and the DOM starting at "accessing refs" section](/docs/refs-and-the-dom.html)
 
 ## Getting started
