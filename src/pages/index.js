@@ -9,14 +9,14 @@ import Container from 'components/Container';
 import Flex from 'components/Flex';
 import CodeExample from 'components/CodeExample';
 import PropTypes from 'prop-types';
-import React, {Component} from 'react';
-import {graphql} from 'gatsby';
+import React, { Component } from 'react';
+import { graphql } from 'gatsby';
 import TitleAndMetaTags from 'components/TitleAndMetaTags';
 import Layout from 'components/Layout';
-import {colors, media, sharedStyles} from 'theme';
+import { colors, media, sharedStyles } from 'theme';
 import loadScript from 'utils/loadScript';
 import createCanonicalUrl from 'utils/createCanonicalUrl';
-import {babelURL} from 'site-constants';
+import { babelURL } from 'site-constants';
 import logoWhiteSvg from 'icons/logo-white.svg';
 
 class Home extends Component {
@@ -38,11 +38,11 @@ class Home extends Component {
   }
 
   render() {
-    const {babelLoaded} = this.state;
-    const {data, location} = this.props;
-    const {codeExamples, examples, marketing} = data;
+    const { babelLoaded } = this.state;
+    const { data, location } = this.props;
+    const { codeExamples, examples, marketing } = data;
 
-    const code = codeExamples.edges.reduce((lookup, {node}) => {
+    const code = codeExamples.edges.reduce((lookup, { node }) => {
       lookup[node.mdAbsolutePath] = node;
       return lookup;
     }, {});
@@ -53,7 +53,7 @@ class Home extends Component {
           title="React &ndash; A JavaScript library for building user interfaces"
           canonicalUrl={createCanonicalUrl('/')}
         />
-        <div css={{width: '100%'}}>
+        <div css={{ width: '100%' }}>
           <header
             css={{
               backgroundColor: colors.dark,
@@ -135,8 +135,51 @@ class Home extends Component {
                         fontSize: 30,
                       },
                     }}>
-                    An adaptation of the official ReactJS.org documentation
-                     using React Hooks-based explanations and examples.
+                    ReactJS.org documentation with Hooks-based explanations and examples.
+                  </p>
+                  <p
+                    css={{
+                      paddingTop: 35,
+                      textAlign: 'center',
+                      fontSize: 16,
+                      letterSpacing: '0.01em',
+                      fontWeight: 200,
+                      maxWidth: '44ch',
+                      margin: 'auto',
+
+                      [media.size('xsmall')]: {
+                        fontSize: 11,
+                        maxWidth: '20em',
+                        marginLeft: 'auto',
+                        marginRight: 'auto',
+                        paddingTop: 17,
+                      },
+
+                      [media.greaterThan('xlarge')]: {
+                        paddingTop: 20,
+                        fontSize: 20,
+                      },
+                    }}>
+                    Adapted by
+                    <a
+                      css={{ margin: '0 5px' }}
+                      href="https://www.kickstartcoding.com/"
+                      target="_blank"
+                      rel="noopener">
+                      <img
+                        css={{
+                          height: 26,
+                          transform: 'translate(3px, -4px)',
+                          [media.size('xsmall')]: {
+                            transform: 'translate(1px, -3px)',
+                            height: 16,
+                          },
+                        }}
+                        src="/kickstart_coding_logo.png"
+                        alt="Kickstart Coding logo"
+                      />
+                      <strong>Kickstart Coding</strong>
+                    </a>
                   </p>
                   <Flex
                     valign="center"
@@ -196,7 +239,7 @@ class Home extends Component {
                       whiteSpace: 'nowrap',
                     },
                   }}>
-                  {marketing.edges.map(({node: column}, index) => (
+                  {marketing.edges.map(({ node: column }, index) => (
                     <div
                       key={index}
                       css={{
@@ -246,7 +289,7 @@ class Home extends Component {
                         ]}>
                         {column.frontmatter.title}
                       </h3>
-                      <div dangerouslySetInnerHTML={{__html: column.html}} />
+                      <div dangerouslySetInnerHTML={{ __html: column.html }} />
                     </div>
                   ))}
                 </div>
@@ -261,7 +304,7 @@ class Home extends Component {
               />
               <section css={sectionStyles}>
                 <div id="examples">
-                  {examples.edges.map(({node}, index) => {
+                  {examples.edges.map(({ node }, index) => {
                     const snippet = code[node.fileAbsolutePath];
                     return (
                       <CodeExample
@@ -271,7 +314,7 @@ class Home extends Component {
                         containerNodeID={node.frontmatter.domid}
                         loaded={babelLoaded}>
                         <h3 css={headingStyles}>{node.frontmatter.title}</h3>
-                        <div dangerouslySetInnerHTML={{__html: node.html}} />
+                        <div dangerouslySetInnerHTML={{ __html: node.html }} />
                       </CodeExample>
                     );
                   })}
@@ -321,7 +364,7 @@ Home.propTypes = {
   }).isRequired,
 };
 
-const CtaItem = ({children, primary = false}) => (
+const CtaItem = ({ children, primary = false }) => (
   <div
     css={{
       [media.between('small', 'large')]: {
