@@ -20,6 +20,15 @@ As such, for now the sidebar link to [the higher order components page](content/
 
 [This section](/content/docs/integrating-with-other-libraries.md#extracting-data-from-backbone-models) is pretty complex.
 
+### Can we confirm useEffect calls happen after ref updates?
+
+In [refs and the dom](/docs/refs-and-the-dom.html)
+"ref updates happen before useEffect functions get called." <-- true?
+
+### Are callback refs possible with hooks?
+
+See commented section in [refs and the dom](/docs/refs-and-the-dom.html)
+
 ## Skipped sections
 
 * [Render Props](/docs/render-props.html)
