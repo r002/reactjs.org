@@ -53,33 +53,25 @@ To prepare a component for assertions, wrap the code rendering it and performing
 For example, let's say we have this `Counter` component:
 
 ```js
-class Counter extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {count: 0};
-    this.handleClick = this.handleClick.bind(this);
-  }
-  componentDidMount() {
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
     document.title = `You clicked ${this.state.count} times`;
+  })
+
+  function handleClick() {
+    setCount(currentCount => currentCount + 1)
   }
-  componentDidUpdate() {
-    document.title = `You clicked ${this.state.count} times`;
-  }
-  handleClick() {
-    this.setState(state => ({
-      count: state.count + 1,
-    }));
-  }
-  render() {
-    return (
-      <div>
-        <p>You clicked {this.state.count} times</p>
-        <button onClick={this.handleClick}>
-          Click me
-        </button>
-      </div>
-    );
-  }
+
+  return (
+    <div>
+      <p>You clicked {count} times</p>
+      <button onClick={handleClick}>
+        Click me
+      </button>
+    </div>
+  );
 }
 ```
 
