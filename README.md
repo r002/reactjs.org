@@ -16,6 +16,10 @@ As such, for now the sidebar link to [the error boundaries page](content/docs/er
 
 As such, for now the sidebar link to [the higher order components page](content/docs/higher-order-components.md) has been removed.
 
+### Unsure what the remaining useful usages are for render props
+
+As such, for now the sidebar link to [the render props page](/docs/render-props.html) has been removed.
+
 ### Unsure how to adapt examples in the "extracting data from backbone models" section
 
 [This section](/content/docs/integrating-with-other-libraries.md#extracting-data-from-backbone-models) is pretty complex.
@@ -28,11 +32,6 @@ In [refs and the dom](/docs/refs-and-the-dom.html)
 ### Are callback refs possible with hooks?
 
 See commented section in [refs and the dom](/docs/refs-and-the-dom.html)
-
-## Skipped sections
-
-* [Render Props](/docs/render-props.html)
-* [Refs and the DOM starting at "accessing refs" section](/docs/refs-and-the-dom.html)
 
 ## Getting started
 
