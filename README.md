@@ -33,6 +33,10 @@ In [refs and the dom](/docs/refs-and-the-dom.html)
 
 See commented section in [refs and the dom](/docs/refs-and-the-dom.html)
 
+### How do we convert Ideas section in test-renderer?
+
+[ideas section in test-renderer](http://localhost:8000/docs/test-renderer.html#ideas)
+
 ## Getting started
 
 ### Prerequisites
