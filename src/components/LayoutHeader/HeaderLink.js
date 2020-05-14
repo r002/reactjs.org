@@ -5,9 +5,9 @@
  * @flow
  */
 
-import {Link} from 'gatsby';
+import { Link } from 'gatsby';
 import React from 'react';
-import {colors, media} from 'theme';
+import { colors, media } from 'theme';
 
 type Props = {
   isActive: boolean,
@@ -15,7 +15,7 @@ type Props = {
   to: string,
 };
 
-const HeaderLink = ({isActive, title, to}: Props) => (
+const HeaderLink = ({ isActive, title, to }: Props) => (
   <Link css={[style, isActive && activeStyle]} to={to}>
     {title}
     {isActive && <span css={activeAfterStyle} />}

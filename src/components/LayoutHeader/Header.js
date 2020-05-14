@@ -7,10 +7,10 @@
 
 import Container from 'components/Container';
 import HeaderLink from './HeaderLink';
-import {Link} from 'gatsby';
+import { Link } from 'gatsby';
 import React from 'react';
-import {colors, fonts, media} from 'theme';
-import {version} from 'site-constants';
+import { colors, fonts, media } from 'theme';
+import { version } from 'site-constants';
 import ExternalLinkSvg from 'templates/components/ExternalLinkSvg';
 import DocSearch from './DocSearch';
 
@@ -19,7 +19,7 @@ import navHeader from '../../../content/headerNav.yml';
 
 import logoSvg from 'icons/logo.svg';
 
-const Header = ({location}: {location: Location}) => (
+const Header = ({ location }: { location: Location }) => (
   <header
     css={{
       backgroundColor: colors.darker,
@@ -144,13 +144,6 @@ const Header = ({location}: {location: Location}) => (
             alignItems: 'center',
             justifyContent: 'flex-end',
             width: 'auto',
-
-            //[media.lessThan('medium')]: {
-            //width: 'auto',
-            //},
-            //[media.greaterThan('large')]: {
-            //width: 'calc(100% / 4)',
-            //},
           }}>
           <Link
             css={{
@@ -174,37 +167,6 @@ const Header = ({location}: {location: Location}) => (
             }}
             to="/versions">
             v{version}
-          </Link>
-          <Link
-            css={{
-              display: 'flex',
-              alignItems: 'center',
-              padding: '5px 10px',
-              whiteSpace: 'nowrap',
-              ...fonts.small,
-
-              ':hover': {
-                color: colors.brand,
-              },
-
-              ':focus': {
-                outline: 0,
-                backgroundColor: colors.lighter,
-                borderRadius: 15,
-              },
-            }}
-            to="/languages">
-            <LanguagesIcon />{' '}
-            <span
-              css={{
-                marginLeft: '0.5rem',
-
-                [media.lessThan('medium')]: {
-                  display: 'none',
-                },
-              }}>
-              Languages
-            </span>
           </Link>
           <a
             css={{
@@ -253,7 +215,7 @@ const LanguagesIcon = () => (
     viewBox="0 0 24 24">
     <path d="M0 0h24v24H0z" fill="none" />
     <path
-      css={{fill: 'currentColor'}}
+      css={{ fill: 'currentColor' }}
       d="
         M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5
         7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09
