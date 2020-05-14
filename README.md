@@ -24,6 +24,8 @@ As such, for now the sidebar link to [the render props page](/docs/render-props.
 
 [This section](/content/docs/integrating-with-other-libraries.md#extracting-data-from-backbone-models) is pretty complex.
 
+[Possible solution?](https://codepen.io/kickstartcoding/pen/wvKErob?editors=0010)
+
 ### Are callback refs possible with hooks?
 
 See commented section in [refs and the dom](/docs/refs-and-the-dom.html)
