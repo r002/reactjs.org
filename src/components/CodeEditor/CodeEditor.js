@@ -4,11 +4,11 @@
  * @emails react-core
  */
 
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Remarkable from 'remarkable';
-import {LiveEditor, LiveProvider} from 'react-live';
-import {colors, media} from 'theme';
+import { LiveEditor, LiveProvider } from 'react-live';
+import { colors, media } from 'theme';
 import MetaTitle from 'templates/components/MetaTitle';
 
 // Replace unicode to text for other languages
@@ -19,10 +19,10 @@ const unicodeToText = text =>
 
 const compileES5 = (
   code, // eslint-disable-next-line no-undef
-) => Babel.transform(code, {presets: ['es2015', 'react']}).code;
+) => Babel.transform(code, { presets: ['es2015', 'react'] }).code;
 
 // eslint-disable-next-line no-undef
-const compileES6 = code => Babel.transform(code, {presets: ['react']}).code;
+const compileES6 = code => Babel.transform(code, { presets: ['react'] }).code;
 
 class CodeEditor extends Component {
   constructor(props, context) {
@@ -49,7 +49,7 @@ class CodeEditor extends Component {
   }
 
   render() {
-    const {containerNodeID} = this.props;
+    const { containerNodeID } = this.props;
     const {
       compiledES6,
       code,
@@ -115,7 +115,7 @@ class CodeEditor extends Component {
                   <input
                     checked={this.state.showJSX}
                     onChange={event =>
-                      this.setState({showJSX: event.target.checked})
+                      this.setState({ showJSX: event.target.checked })
                     }
                     type="checkbox"
                   />{' '}
@@ -247,14 +247,17 @@ class CodeEditor extends Component {
   }
 
   _render() {
-    const {compiled} = this.state;
+    const { compiled } = this.state;
 
     try {
-      // Example code requires React, ReactDOM, and Remarkable to be within scope.
+      // Example code requires React, useState, useEffect, ReactDOM, 
+      // and Remarkable to be within scope.
       // It also requires a "mountNode" variable for ReactDOM.render()
       // eslint-disable-next-line no-new-func
-      new Function('React', 'ReactDOM', 'Remarkable', compiled)(
+      new Function('React', 'useState', 'useEffect', 'ReactDOM', 'Remarkable', compiled)(
         React,
+        React.useState,
+        React.useEffect,
         ReactDOM,
         Remarkable,
       );
