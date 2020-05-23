@@ -100,9 +100,9 @@ Check out the next sections for more tips on integrating React.
 
 Commonly, you might want to display React components in multiple places on the HTML page. Here is an example that displays the "Like" button three times and passes some data to it:
 
-[View the full example source code](https://gist.github.com/gaearon/faa67b76a6c47adbab04f739cba7ceda)
+[View the full example source code](https://gist.github.com/neurodynamic/98273ed02956dd033aec0736e783df35)
 
-[Download the full example (2KB zipped)](https://gist.github.com/gaearon/faa67b76a6c47adbab04f739cba7ceda/archive/9d0dd0ee941fea05fd1357502e5aa348abb84c12.zip)
+[Download the full example (2KB zipped)](https://gist.github.com/neurodynamic/98273ed02956dd033aec0736e783df35/archive/3bdd32b6974ae2e5a93e877bb8751eeee4d9a035.zip)
 
 >Note
 >
@@ -131,7 +131,7 @@ const e = React.createElement;
 // Display a "Like" <button>
 return e(
   'button',
-  { onClick: () => this.setState({ liked: true }) },
+  { onClick: () => setLiked(true) },
   'Like'
 );
 ```
@@ -141,7 +141,7 @@ However, React also offers an option to use [JSX](/docs/introducing-jsx.html) in
 ```js
 // Display a "Like" <button>
 return (
-  <button onClick={() => this.setState({ liked: true })}>
+  <button onClick={() => setLiked(true)}>
     Like
   </button>
 );
@@ -195,7 +195,7 @@ npx babel --watch src --out-dir . --presets react-app/prod
 
 Don't wait for it to finish -- this command starts an automated watcher for JSX.
 
-If you now create a file called `src/like_button.js` with this **[JSX starter code](https://gist.github.com/gaearon/c8e112dc74ac44aac4f673f2c39d19d1/raw/09b951c86c1bf1116af741fa4664511f2f179f0a/like_button.js)**, the watcher will create a preprocessed `like_button.js` with the plain JavaScript code suitable for the browser. When you edit the source file with JSX, the transform will re-run automatically.
+If you now create a file called `src/like_button.js` with this **[JSX starter code](https://gist.githubusercontent.com/neurodynamic/98273ed02956dd033aec0736e783df35/raw/3bdd32b6974ae2e5a93e877bb8751eeee4d9a035/like_button.js)**, the watcher will create a preprocessed `like_button.js` with the plain JavaScript code suitable for the browser. When you edit the source file with JSX, the transform will re-run automatically.
 
 As a bonus, this also lets you use modern JavaScript syntax features like classes without worrying about breaking older browsers. The tool we just used is called Babel, and you can learn more about it from [its documentation](https://babeljs.io/docs/en/babel-cli/).
 
