@@ -1068,7 +1068,7 @@ Congratulations! You've created a tic-tac-toe game that:
 * Stores a game's history as a game progresses,
 * Allows players to review a game's history and see previous versions of a game's board.
 
-Nice work! We hope you now feel like you have a decent grasp on how React works.
+Nice work! We hope you now feel like you have a decent grasp of how React works.
 
 Check out the final result here: **[Final Result](https://codepen.io/kickstartcoding/pen/YzyawOo?editors=0010)**.
 

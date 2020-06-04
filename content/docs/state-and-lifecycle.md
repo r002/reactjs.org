@@ -375,12 +375,6 @@ State is often called "local" or "encapsulated". It is not accessible to any com
 A component may choose to pass its state down as props to its child components:
 
 ```js
-<h2>It is {date.toLocaleTimeString()}.</h2>
-```
-
-This also works for user-defined components:
-
-```js
 <FormattedDate date={date} />
 ```
 
