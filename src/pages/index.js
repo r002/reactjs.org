@@ -210,6 +210,24 @@ class Home extends Component {
                       </ButtonLink>
                     </CtaItem>
                   </Flex>
+                  <Flex
+                    valign="center"
+                    halign="center"
+                    css={{
+                      paddingTop: 20,
+                      flexWrap: 'wrap',
+                      justifyContent: 'center',
+
+                      [media.greaterThan('xlarge')]: {
+                        paddingTop: 45,
+                      },
+                    }}>
+                    <CtaItem>
+                      <ButtonLink target="_blank" rel="noopener noreferrer" to="https://kickstartcoding.online/learn/articles/converting-reactjsorg-use-hooks/" type="secondary">
+                        Read about the making of this site
+                      </ButtonLink>
+                    </CtaItem>
+                  </Flex>
                 </Container>
               </div>
             </div>
