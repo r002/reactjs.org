@@ -139,7 +139,7 @@ class Home extends Component {
                         fontSize: 30,
                       },
                     }}>
-                    ReactJS.org documentation with Hooks-based explanations and examples.
+                    An unofficial adaptation of the ReactJS.org documentation with Hooks-based explanations and examples.
                   </p>
                   <p
                     css={{
