@@ -2,6 +2,23 @@ function TodoApp() {
   const [items, setItems] = React.useState([]);
   const [text, setText] = React.useState('');
 
+  function handleChange(e) {
+    setText(e.target.value);
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (text.length === 0) {
+      return;
+    }
+    const newItem = {
+      text: text,
+      id: Date.now()
+    };
+    setItems(items.concat(newItem));
+    setText('');
+  }
+
   return (
     <div>
       <h3>TODO</h3>
@@ -21,23 +38,6 @@ function TodoApp() {
       </form>
     </div>
   );
-
-  function handleChange(e) {
-    setText(e.target.value);
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    if (text.length === 0) {
-      return;
-    }
-    const newItem = {
-      text: text,
-      id: Date.now()
-    };
-    setItems(items.concat(newItem));
-    setText('');
-  }
 }
 
 function TodoList(props) {
