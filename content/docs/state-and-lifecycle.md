@@ -181,10 +181,7 @@ We want to [set up a timer](https://developer.mozilla.org/en-US/docs/Web/API/Win
 The code for setting up a timer to run a `tick` function every second looks like this:
 
 ```js
-const timerID = setInterval(
-  () => tick(),
-  1000
-);
+const timerID = setInterval(tick, 1000);
 ```
 
 This timer code is all JavaScript so far. No React yet.
@@ -203,10 +200,7 @@ The `useEffect` function takes a function as an argument. The function you pass 
 
 ```js{1,6}
 useEffect(() => {
-  const timerID = setInterval(
-    () => tick(),
-    1000
-  );
+  const timerID = setInterval(tick, 1000);
 });
 ```
 
@@ -214,10 +208,7 @@ If you want some specific code to run when the component ***un***mounts, you hav
 
 ```js{7}
 useEffect(() => {
-  const timerID = setInterval(
-    () => tick(),
-    1000
-  )
+  const timerID = setInterval(tick, 1000);
 
   return () => clearInterval(timerID);
 });
@@ -253,10 +244,7 @@ function Clock(props) {
   const [date, setDate] = useState(new Date());
 
   useEffect(() => {
-    const timerID = setInterval(
-      () => tick(),
-      1000
-    );
+    const timerID = setInterval(tick, 1000);
     
     return () => clearInterval(timerID);
   });
@@ -291,10 +279,7 @@ function Clock(props) {
   const [date, setDate] = useState(new Date());
 
   useEffect(() => {
-    const timerID = setInterval(
-      () => tick(),
-      1000
-    );
+    const timerID = setInterval(tick, 1000);
     
     return () => clearInterval(timerID);
   });
