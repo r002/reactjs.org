@@ -62,14 +62,15 @@ module.exports = {
             options: {
               defaultText: '<b>Try it on CodePen</b>',
               directory: `${__dirname}/examples/`,
-              externals: [
-                `//unpkg.com/react/umd/react.development.js`,
-                `//unpkg.com/react-dom/umd/react-dom.development.js`,
-                `//reactwithhooks.netlify.app/expose_hooks.js`,
-              ],
-              dependencies: [`react`, `react-dom`],
-              redirectTemplate: `${__dirname}/src/templates/codepen-example.js`,
               target: '_blank',
+              codepen: {
+                redirectTemplate: `${__dirname}/src/templates/codepen-example.js`,
+                externals: [
+                  `//unpkg.com/react/umd/react.development.js`,
+                  `//unpkg.com/react-dom/umd/react-dom.development.js`,
+                  `//reactwithhooks.netlify.app/expose_hooks.js`,
+                ],
+              },
             },
           },
           {
